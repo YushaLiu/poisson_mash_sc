@@ -9,3 +9,8 @@ editor_options:
 ---
 
 Welcome to my research website.
+
+
+## Application and simulation based on cytokines dataset
+Click on this [link](simulations.html) to see application of poisson mash and competing methods on simulated data. <br/>
+Click on this [link](application_B_cells.html) to see application of poisson mash ruv to a subset of B cells from the single cytokines dataset. <br/>

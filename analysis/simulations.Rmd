@@ -1,0 +1,96 @@
+---
+title: "Application of poisson mash and competing methods to simulated single cell data"
+author: "Yusha Liu"
+header-includes:
+date: "2021-3-30"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+
+## Description of approaches
+### MASH-based approaches:
+\noindent 1. poisson mash: fit poisson mash with gene-specific means and random effects to the count data while not accounting for unwanted variation.
+
+\noindent 2. poisson mash ruv: fit poisson mash with gene-specific means and random effects to the count data while accounting for unwanted variation. For ruv, the $J \times D$ factor matrix is estimated using [GLMPCA](https://cran.r-project.org/web/packages/glmpca/index.html) while protecting the condition-specific effects.
+
+\noindent 3. mash: fit mash with gene-specific means and random effects to the gene expression data normalized using [Seurat](https://satijalab.org/seurat/) while not accounting for unwanted variation. We set $\alpha = 1$, i.e., the EZ model. 
+
+\noindent 4. mash ruv: fit mash with gene-specific means and random effects to the normalized data while accounting for unwanted variation. For ruv, the $J \times D$ factor matrix is estimated using [flashier](https://github.com/willwerscheid/flashier) while protecting the condition-specific effects. We set $\alpha = 1$, i.e., the EZ model.
+
+\noindent 5. mash cb: fit mash with no common baseline to the normalized data using [mashr](https://stephenslab.github.io/mashr/articles/intro_mashnobaseline.html), where the reference is the mean over all conditions.  We set $\alpha = 1$, i.e., the EZ model. The implementation is similar to method 3 but without the random effect term. Also, the selection of "strong" subset of genes in the ED step is conducted differently.   
+
+
+### Benchmark approaches:
+We also implemented the best-performing methods identified by this comprehensive [benchmark paper](https://www.nature.com/articles/nmeth.4612.pdf?origin=ppub), which evaluated 36 approaches that have been developed for DE analysis on bulk RNA-seq data or scRNA-seq data. We only considered methods that allow for comparison across multiple ($>2$) conditions, and performed an ANOVA-like test for differences between any of the conditions. With each approach, we obtained a gene-wise p-value adjusted for multiple comparisons based on FDR.
+
+\noindent 6. [edgeR-QLF-DetRate](https://link.springer.com/protocol/10.1007/978-1-4939-3578-9_19): fit a quasi-likelihood negative binomial generalized log-linear model to the count data which includes the cellular detection rate (the fraction of genes that are detected with nonzero counts) as a covariate in the model. 
+
+\noindent 7. [MAST-cpm-DetRate](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-015-0844-5): fit a two-part generalized linear model to test DE, with one component modeling the discrete expression rate of each gene across cells and the other component modeling the conditional continuous expression level. The cellular detection rate is included as a covariate in the model. 
+
+\noindent 8. [limma-trend](http://www.bioconductor.org/packages/devel/bioc//manuals/limma/man/limma.pdf): fit limma-trend to the $\log_2$ transformed CPM data. 
+
+\noindent 9. [Kruskal-Wallis test](https://en.wikipedia.org/wiki/Kruskal–Wallis_one-way_analysis_of_variance): perform Kruskal-Wallis test for DE analysis, which is a non-parametric analogue of ANOVA. 
+
+
+
+## Simulation scenarios
+To simulate single cell data, we started with a subset of the single cell cytokines data. We first randomly permuted the cells with respect to the condition labels to create null data, then used thinning to add condition effects $\beta_{jr} \sim \sum_k \pi_k MVN(0, U_k)$ to a subset of genes, where the prior covariances $U_k$'s are learned from the poisson mash fit to a subset of B cells in the original dataset, with the effect size (in terms of $\max_r \mid \beta_{jr}\mid$) further scaled to be realistic. We started with the following subsets of the real data, and removed genes with fewer than 25 counts summed over all cells.
+
+\noindent Setting 1: a subset of B cells with 8,358 genes and 2,096 cells from 25 cytokine treatments.
+
+\noindent Setting 2: a larger subset of B cells with 10,691 genes and 15,705 cells from 25 cytokine treatments.
+
+\noindent Setting 3: a subset of cells from "Ctrl2" with 9,041 genes and 2,182 cells from 8 cell types. Since the DE analysis results across cell types, which are themselves identified based on gene expression profiles, are dubious without appropriate correction, we only assessed the performance of methods on simulated null data under this scenario. 
+
+We simulate 20 single cell datasets for each scenario.
+
+
+
+## Simulation results for null data
+### Setting 1
+```{r warning=FALSE, message=FALSE}
+### read in result summary
+num_effects <- readRDS("../simulations_sc/setting1/sim_null_summary.Rds")
+
+### number of false positives
+num_effects
+
+```
+
+
+### Setting 2
+```{r warning=FALSE, message=FALSE}
+### read in result summary
+num_effects <- readRDS("../simulations_sc/setting2/sim_null_summary.Rds")
+
+### number of false positives
+num_effects
+
+```
+
+### Setting 3
+```{r warning=FALSE, message=FALSE}
+### read in result summary
+num_effects <- readRDS("../simulations_sc/setting3/sim_null_summary.Rds")
+
+### number of false positives
+num_effects
+
+```
+
+
+
+## Effect-sharing patterns across conditions for non-null data
+```{r warning=FALSE, message=FALSE}
+cols.trt <- readRDS("../simulations_sc/setting2/condition_colors.Rds")
+ulist.sim <- readRDS("../simulations_sc/setting2/ulist_sim.rds")
+
+for (k in 1:length(ulist.sim$ulist)){
+  v <- pmax(ulist.sim$ulist[[k]], 0)
+  
+  barplot(v/v[which.max(abs(v))], names = names(cols.trt), cex.names = 0.8, las = 2, main = paste0("Effect-sharing pattern: u", k), col = cols.trt)
+}
+
+```
