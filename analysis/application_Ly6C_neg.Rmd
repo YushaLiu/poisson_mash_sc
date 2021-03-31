@@ -1,0 +1,104 @@
+---
+title: "Application of poisson mash ruv to Ly6C- monocytes in single cell cytokines data"
+author: "Yusha Liu"
+header-includes:
+date: "2021-3-30"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+## Summary
+We apply poisson mash ruv and mash to a subset of Ly6C- monocytes from a single cell cytokines dataset, where the conditions represent different types of cytokine treatments ($R=46$). This dataset includes expression data of $J=10,286$ genes from $3,855$ cells. Genes with fewer than $25$ counts summed over all cells are removed. 
+```{r warning=FALSE, message=FALSE}
+library(pheatmap)
+library(gridExtra)
+
+cols.trt <- readRDS("../applications_sc/B_cells/condition_colors.Rds")
+trts <- names(cols.trt)
+
+```
+
+
+## Running ED step
+To estimate the data-driven prior covariances, we fit poisson mash ruv without scaling parameters to a subset of genes that are identified to be differentially expressed across conditions by a conditional multinomial goodness-of-fit test. 
+```{r warning=FALSE, message=FALSE}
+## load in the ED results
+fit.ed <- readRDS("../applications_sc/Ly6C-/pois_mash_ruv_ed.Rds")
+
+## running time per iteration in ED
+fit.ed$runtime/length(fit.ed$ELBO)
+                      
+## look at the ELBO
+plot(fit.ed$ELBO, xlab = "niter", ylab = "elbo", main="fitting ED step")
+
+```
+
+
+## Running poisson mash ruv
+We then fit poisson mash ruv to the entire dataset.
+```{r warning=FALSE, message=FALSE}
+## load in the poisson mash ruv fit
+res <- readRDS("../applications_sc/Ly6C-/pois_mash_ruv_fit.Rds")
+
+## running time
+res$runtime
+
+## look at ELBO
+plot(res$ELBO, xlab = "niter", ylab = "elbo", main="Fitting poisson mash ruv")
+
+## calculate prior weights
+wlist <- res$wlist
+pi.mat <- matrix(res$pi, ncol=length(wlist), byrow=TRUE)
+
+rownames(pi.mat) <- c(names(res$Ulist), names(res$ulist))
+colnames(pi.mat) <- paste0("w=", round(wlist, 3))
+pheatmap(pi.mat, cluster_rows=FALSE, cluster_cols=FALSE, fontsize_row = 6, fontsize_col=6, 
+         main="Estimated weights of prior covariances in poisson mash ruv")
+
+rowSums(pi.mat, 3)
+
+```
+
+
+
+## Estimate of data-driven covariances from ED step
+```{r warning=FALSE, message=FALSE}
+### Estimate of top eigenvectors of the data-driven covariance initialized by rank-5 PCA
+eig.tPCA <- eigen(fit.ed$Ulist[[1]])
+pve.tPCA <- eig.tPCA$values/sum(eig.tPCA$values)
+
+for (k in 1:2){
+  v <- eig.tPCA$vectors[,k]
+  
+  barplot(v/v[which.max(abs(v))], names = names(cols.trt), cex.names = 0.5, las = 2, 
+          main = paste0(names(fit.ed$Ulist)[1], ": weight ", round(rowSums(pi.mat)[1],3), 
+                        ":\nEigenvector ", k, " (pve = ", round(pve.tPCA[k],3), ")"), col = cols.trt)
+}
+
+```
+
+
+
+## Comparison to mash cb and mash ruv
+We also implemented mash without common baseline and mash ruv to the gene expression data normalized using [Seurat](https://satijalab.org/seurat/), and compared the number of DE genes to the results of poisson mash ruv. For all implementations, the reference is the mean over all 46 conditions. 
+```{r warning=FALSE, message=FALSE}
+### load in the different versions of mash fit
+pois.ruv <- readRDS("../applications_sc/Ly6C-/pois_mash_ruv_posterior.Rds")
+mash.cb <- readRDS("../applications_sc/Ly6C-/mash_common_baseline.Rds")
+mash.ruv <- readRDS("../applications_sc/Ly6C-/mash_ruv_posterior.Rds")
+
+### poisson mash ruv
+idx.pois <- which(apply(pois.ruv$lfsr, 1, min) < 0.05)
+length(idx.pois)
+
+### mash without common baseline
+idx.mash.cb <- mashr::get_significant_results(mash.cb)
+length(idx.mash.cb)
+
+### mash ruv
+idx.mash.ruv <- which(apply(mash.ruv$lfsr, 1, min) < 0.05)
+length(idx.mash.ruv)
+
+```
+
