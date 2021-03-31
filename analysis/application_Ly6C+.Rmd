@@ -1,5 +1,5 @@
 ---
-title: "Application of poisson mash ruv to B cells in single cell cytokines data"
+title: "Application of poisson mash ruv to Ly6C+ monocytes in single cell cytokines data"
 author: "Yusha Liu"
 header-includes:
 date: "2021-3-30"
@@ -9,7 +9,7 @@ editor_options:
 ---
 
 ## Summary
-We apply poisson mash ruv and mash to a subset of B cells from a single cell cytokines dataset, where the conditions represent different types of cytokine treatments ($R=46$). This dataset includes expression data of $J=10,150$ genes from $9,405$ cells. Genes with fewer than $25$ counts summed over all cells are removed. 
+We apply poisson mash ruv and mash to a subset of Ly6C+ monocytes from a single cell cytokines dataset, where the conditions represent different types of cytokine treatments ($R=46$). This dataset includes expression data of $J=10,417$ genes from $4,354$ cells. Genes with fewer than $25$ counts summed over all cells are removed. 
 ```{r warning=FALSE, message=FALSE}
 library(pheatmap)
 library(gridExtra)
@@ -24,7 +24,7 @@ trts <- names(cols.trt)
 To estimate the data-driven prior covariances, we fit poisson mash ruv without scaling parameters to a subset of genes that are identified to be differentially expressed across conditions by a conditional multinomial goodness-of-fit test. 
 ```{r warning=FALSE, message=FALSE}
 ## load in the ED results
-fit.ed <- readRDS("../applications_sc/B_cells/pois_mash_ruv_ed.Rds")
+fit.ed <- readRDS("../applications_sc/Ly6C+/pois_mash_ruv_ed.Rds")
 
 ## running time per iteration in ED
 fit.ed$runtime/length(fit.ed$ELBO)
@@ -39,7 +39,7 @@ plot(fit.ed$ELBO, xlab = "niter", ylab = "elbo", main="fitting ED step")
 We then fit poisson mash ruv to the entire dataset.
 ```{r warning=FALSE, message=FALSE}
 ## load in the poisson mash ruv fit
-res <- readRDS("../applications_sc/B_cells/pois_mash_ruv_fit.Rds")
+res <- readRDS("../applications_sc/Ly6C+/pois_mash_ruv_fit.Rds")
 
 ## running time
 res$runtime
@@ -78,7 +78,7 @@ for (k in 1:2){
 
 
 ### Estimate of top eigenvectors of rank-1 data-driven covariance matrices
-for (k in 3:4){
+for (k in 1:3){
   v <- as.numeric(fit.ed$ulist[[k]])
   
   barplot(v/v[which.max(abs(v))], names = names(cols.trt), cex.names = 0.5, las = 2, 
@@ -93,9 +93,9 @@ for (k in 3:4){
 We also implemented mash without common baseline and mash ruv to the gene expression data normalized using [Seurat](https://satijalab.org/seurat/), and compared the number of DE genes to the results of poisson mash ruv. For all implementations, the reference is the mean over all 46 conditions. 
 ```{r warning=FALSE, message=FALSE}
 ### load in the different versions of mash fit
-pois.ruv <- readRDS("../applications_sc/B_cells/pois_mash_ruv_posterior.Rds")
-mash.cb <- readRDS("../applications_sc/B_cells/mash_common_baseline.Rds")
-mash.ruv <- readRDS("../applications_sc/B_cells/mash_ruv_posterior.Rds")
+pois.ruv <- readRDS("../applications_sc/Ly6C+/pois_mash_ruv_posterior.Rds")
+mash.cb <- readRDS("../applications_sc/Ly6C+/mash_common_baseline.Rds")
+mash.ruv <- readRDS("../applications_sc/Ly6C+/mash_ruv_posterior.Rds")
 
 ### poisson mash ruv
 idx.pois <- which(apply(pois.ruv$lfsr, 1, min) < 0.05)
@@ -108,30 +108,6 @@ length(idx.mash.cb)
 ### mash ruv
 idx.mash.ruv <- which(apply(mash.ruv$lfsr, 1, min) < 0.05)
 length(idx.mash.ruv)
-
-```
-
-
-## A few examples
-```{r warning=FALSE, message=FALSE}
-### load in the plotting function
-source("../applications_sc/B_cells/plot_by_gene_v2.R")
-
-### load in the condition-level count data
-data <- readRDS("../applications_sc/B_cells/data_jr.Rds")
-data.jr <- data$data.jr
-s <- data$s
-
-plot_by_gene(data=data.jr, s=s, res.pois=pois.ruv, res.mash=mash.ruv, genename="Vim", cols.trt=cols.trt)
-plot_by_gene(data=data.jr, s=s, res.pois=pois.ruv, res.mash=mash.ruv, genename="Ahnak", cols.trt=cols.trt)
-plot_by_gene(data=data.jr, s=s, res.pois=pois.ruv, res.mash=mash.ruv, genename="Lgals1", cols.trt=cols.trt)
-plot_by_gene(data=data.jr, s=s, res.pois=pois.ruv, res.mash=mash.ruv, genename="Lmo7", cols.trt=cols.trt)
-plot_by_gene(data=data.jr, s=s, res.pois=pois.ruv, res.mash=mash.ruv, genename="Irf7", cols.trt=cols.trt)
-plot_by_gene(data=data.jr, s=s, res.pois=pois.ruv, res.mash=mash.ruv, genename="Oasl2", cols.trt=cols.trt)
-plot_by_gene(data=data.jr, s=s, res.pois=pois.ruv, res.mash=mash.ruv, genename="Lgals3bp", cols.trt=cols.trt)
-plot_by_gene(data=data.jr, s=s, res.pois=pois.ruv, res.mash=mash.ruv, genename="Parp9", cols.trt=cols.trt)
-plot_by_gene(data=data.jr, s=s, res.pois=pois.ruv, res.mash=mash.ruv, genename="Mndal", cols.trt=cols.trt)
-plot_by_gene(data=data.jr, s=s, res.pois=pois.ruv, res.mash=mash.ruv, genename="Sp100", cols.trt=cols.trt)
 
 ```
 
