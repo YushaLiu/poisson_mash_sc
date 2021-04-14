@@ -503,16 +503,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomYushaLiupoissonmashsctree36caa0ed3cb811d7fc653a8c70a390e20aae45actargetblank36caa0ea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/YushaLiu/poisson_mash_sc/tree/36caa0ed3cb811d7fc653a8c70a390e20aae45ac" target="_blank">36caa0e</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomYushaLiupoissonmashsctreeb93f61f9ba81df14635225b315619fdb40f93462targetblankb93f61fa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/YushaLiu/poisson_mash_sc/tree/b93f61f9ba81df14635225b315619fdb40f93462" target="_blank">b93f61f</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomYushaLiupoissonmashsctree36caa0ed3cb811d7fc653a8c70a390e20aae45actargetblank36caa0ea" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomYushaLiupoissonmashsctreeb93f61f9ba81df14635225b315619fdb40f93462targetblankb93f61fa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/YushaLiu/poisson_mash_sc/tree/36caa0ed3cb811d7fc653a8c70a390e20aae45ac" target="_blank">36caa0e</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/YushaLiu/poisson_mash_sc/tree/b93f61f9ba81df14635225b315619fdb40f93462" target="_blank">b93f61f</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -568,6 +568,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/b93f61f9ba81df14635225b315619fdb40f93462/analysis/application_B_cells_v2.Rmd" target="_blank">b93f61f</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-14
+</td>
+<td>
+update notation
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/YushaLiu/poisson_mash_sc/2a497f2b64ce6af5fb27355d3f30e16c851db8bc/docs/application_B_cells_v2.html" target="_blank">2a497f2</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-14
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/YushaLiu/poisson_mash_sc/blob/36caa0ed3cb811d7fc653a8c70a390e20aae45ac/analysis/application_B_cells_v2.Rmd" target="_blank">36caa0e</a>
 </td>
 <td>
@@ -609,6 +643,43 @@ fit.ed$runtime/length(fit.ed$ELBO)</code></pre>
 <pre class="r"><code>## look at the ELBO
 plot(fit.ed$ELBO, xlab = &quot;niter&quot;, ylab = &quot;elbo&quot;, main=&quot;fitting ED step&quot;)</code></pre>
 <p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-2-1">
+Past versions of unnamed-chunk-2-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-2-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/2a497f2b64ce6af5fb27355d3f30e16c851db8bc/docs/figure/application_B_cells_v2.Rmd/unnamed-chunk-2-1.png" target="_blank">2a497f2</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="adding-epsilon2-to-the-diagonals-of-rank-1-prior-covariances" class="section level2">
 <h2>Adding epsilon2 to the diagonals of rank-1 prior covariances</h2>
@@ -636,11 +707,49 @@ formatC(epsilon2_list, format = &quot;e&quot;, digits = 1)</code></pre>
 <pre class="r"><code>### plot ELBO as a function of epsilon2
 plot(1:20, ELBOs, type=&quot;p&quot;, xaxt=&quot;n&quot;, xlab=&quot;epsilon2&quot;, ylab=&quot;ELBO&quot;, main=&quot;ELBO as a function of epsilon2 in the ED step&quot;)
 axis(1, at=1:20, labels=formatC(epsilon2_list, format = &quot;e&quot;, digits = 0), las=2)</code></pre>
-<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /> The ELBO peaks at <span class="math inline">\(\epsilon^2 = 1.8e-5\)</span>, and the largest ELBO is -171230.3. For <span class="math inline">\(\epsilon^2 = 1.4e-3\)</span>, ELBO is -171263.0. For <span class="math inline">\(\epsilon^2 = 1.3e-2\)</span>, ELBO is -171313.8. However, we found that adding an <span class="math inline">\(\epsilon^2 \approx 1e-4\)</span> doesn’t seem to effectively solve the tight error bar issue.</p>
+<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-3-1">
+Past versions of unnamed-chunk-3-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-3-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/2a497f2b64ce6af5fb27355d3f30e16c851db8bc/docs/figure/application_B_cells_v2.Rmd/unnamed-chunk-3-1.png" target="_blank">2a497f2</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>The ELBO peaks at <span class="math inline">\(\epsilon^2\)</span> = 1.8e-5, and the largest ELBO is -171230.3. For <span class="math inline">\(\epsilon^2\)</span> = 1.4e-3, ELBO is -171263.0. For <span class="math inline">\(\epsilon^2\)</span> = 1.3e-2, ELBO is -171313.8. However, we found that adding an <span class="math inline">\(\epsilon^2 \le\)</span> 1e-4 doesn’t seem to effectively solve the tight error bar issue.</p>
 </div>
 <div id="running-poisson-mash-ruv" class="section level2">
 <h2>Running poisson mash ruv</h2>
-<p>We then fit poisson mash ruv to the entire dataset, with <span class="math inline">\(\epsilon^2 = 1e-2\)</span>.</p>
+<p>We then fit poisson mash ruv to the entire dataset, with <span class="math inline">\(\epsilon^2\)</span> = 1e-2.</p>
 <pre class="r"><code>## load in the poisson mash ruv fit
 res &lt;- readRDS(&quot;../applications_sc/B_cells/pois_mash_ruv_fit_v5.Rds&quot;)
 
@@ -651,6 +760,43 @@ res$runtime</code></pre>
 <pre class="r"><code>## look at ELBO
 plot(res$ELBO, xlab = &quot;niter&quot;, ylab = &quot;elbo&quot;, main=&quot;Fitting poisson mash ruv&quot;)</code></pre>
 <p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-1">
+Past versions of unnamed-chunk-4-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-4-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/2a497f2b64ce6af5fb27355d3f30e16c851db8bc/docs/figure/application_B_cells_v2.Rmd/unnamed-chunk-4-1.png" target="_blank">2a497f2</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>## calculate prior weights
 pi.mat &lt;- matrix(res$pi, ncol=length(res$wlist), byrow=TRUE)
 
@@ -659,6 +805,43 @@ colnames(pi.mat) &lt;- paste0(&quot;w=&quot;, round(res$wlist, 3))
 pheatmap(pi.mat, cluster_rows=FALSE, cluster_cols=FALSE, fontsize_row = 6, fontsize_col=6, 
          main=&quot;Estimated weights of prior covariances in poisson mash ruv&quot;)</code></pre>
 <p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-4-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-2">
+Past versions of unnamed-chunk-4-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-4-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/2a497f2b64ce6af5fb27355d3f30e16c851db8bc/docs/figure/application_B_cells_v2.Rmd/unnamed-chunk-4-2.png" target="_blank">2a497f2</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>rowSums(pi.mat, 3)</code></pre>
 <pre><code>       tPCA     Emp_cov        PC_1        PC_2        PC_3        PC_4 
 0.343086668 0.012040889 0.025680365 0.010238384 0.136029289 0.238990961 
@@ -692,7 +875,120 @@ for (k in 1:3){
           main = paste0(names(fit.ed$Ulist)[1], &quot;: weight &quot;, round(rowSums(pi.mat)[1],3), 
                         &quot;:\nEigenvector &quot;, k, &quot; (pve = &quot;, round(pve.tPCA[k],3), &quot;)&quot;), col = cols.trt)
 }</code></pre>
-<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-5-2.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-5-3.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-1">
+Past versions of unnamed-chunk-5-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/2a497f2b64ce6af5fb27355d3f30e16c851db8bc/docs/figure/application_B_cells_v2.Rmd/unnamed-chunk-5-1.png" target="_blank">2a497f2</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-5-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-2">
+Past versions of unnamed-chunk-5-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/2a497f2b64ce6af5fb27355d3f30e16c851db8bc/docs/figure/application_B_cells_v2.Rmd/unnamed-chunk-5-2.png" target="_blank">2a497f2</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-5-3.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-3">
+Past versions of unnamed-chunk-5-3.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/2a497f2b64ce6af5fb27355d3f30e16c851db8bc/docs/figure/application_B_cells_v2.Rmd/unnamed-chunk-5-3.png" target="_blank">2a497f2</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>### Estimate of top eigenvectors of rank-1 data-driven covariance matrices
 for (k in 1:length(fit.ed$ulist)){
   if(rowSums(pi.mat)[k+2] &gt; 5e-2 &amp; sum(fit.ed$ulist[[k]]!=0)&gt;0){
@@ -701,7 +997,82 @@ for (k in 1:length(fit.ed$ulist)){
             main = paste0(names(fit.ed$ulist)[k], &quot;: weight &quot;, round(rowSums(pi.mat)[k+2],3)))    
   }
 }</code></pre>
-<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-5-4.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-5-5.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-5-4.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-4">
+Past versions of unnamed-chunk-5-4.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/2a497f2b64ce6af5fb27355d3f30e16c851db8bc/docs/figure/application_B_cells_v2.Rmd/unnamed-chunk-5-4.png" target="_blank">2a497f2</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-5-5.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-5">
+Past versions of unnamed-chunk-5-5.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-5" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/2a497f2b64ce6af5fb27355d3f30e16c851db8bc/docs/figure/application_B_cells_v2.Rmd/unnamed-chunk-5-5.png" target="_blank">2a497f2</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="comparison-to-poisson-mash-ruv-fit-without-adding-epsilon2" class="section level2">
 <h2>Comparison to poisson mash ruv fit without adding epsilon2</h2>
@@ -738,25 +1109,1155 @@ data.jr &lt;- data$data.jr
 s &lt;- data$s
 
 plot_by_gene(data=data.jr, s=s, res.pois1=pois.ruv.v1, res.pois2=pois.ruv.v2, res.mash=mash.cb$result, genename=&quot;Vim&quot;, cols.trt=cols.trt)</code></pre>
-<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-2.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-3.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-1">
+Past versions of unnamed-chunk-7-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/2a497f2b64ce6af5fb27355d3f30e16c851db8bc/docs/figure/application_B_cells_v2.Rmd/unnamed-chunk-7-1.png" target="_blank">2a497f2</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-2">
+Past versions of unnamed-chunk-7-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/2a497f2b64ce6af5fb27355d3f30e16c851db8bc/docs/figure/application_B_cells_v2.Rmd/unnamed-chunk-7-2.png" target="_blank">2a497f2</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-3.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-3">
+Past versions of unnamed-chunk-7-3.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/2a497f2b64ce6af5fb27355d3f30e16c851db8bc/docs/figure/application_B_cells_v2.Rmd/unnamed-chunk-7-3.png" target="_blank">2a497f2</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>plot_by_gene(data=data.jr, s=s, res.pois1=pois.ruv.v1, res.pois2=pois.ruv.v2, res.mash=mash.cb$result, genename=&quot;Ahnak&quot;, cols.trt=cols.trt)</code></pre>
-<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-4.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-5.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-6.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-4.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-4">
+Past versions of unnamed-chunk-7-4.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/2a497f2b64ce6af5fb27355d3f30e16c851db8bc/docs/figure/application_B_cells_v2.Rmd/unnamed-chunk-7-4.png" target="_blank">2a497f2</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-5.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-5">
+Past versions of unnamed-chunk-7-5.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-5" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/2a497f2b64ce6af5fb27355d3f30e16c851db8bc/docs/figure/application_B_cells_v2.Rmd/unnamed-chunk-7-5.png" target="_blank">2a497f2</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-6.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-6">
+Past versions of unnamed-chunk-7-6.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-6" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/2a497f2b64ce6af5fb27355d3f30e16c851db8bc/docs/figure/application_B_cells_v2.Rmd/unnamed-chunk-7-6.png" target="_blank">2a497f2</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>plot_by_gene(data=data.jr, s=s, res.pois1=pois.ruv.v1, res.pois2=pois.ruv.v2, res.mash=mash.cb$result, genename=&quot;Lgals1&quot;, cols.trt=cols.trt)</code></pre>
-<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-7.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-8.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-9.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-7.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-7">
+Past versions of unnamed-chunk-7-7.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-7" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/2a497f2b64ce6af5fb27355d3f30e16c851db8bc/docs/figure/application_B_cells_v2.Rmd/unnamed-chunk-7-7.png" target="_blank">2a497f2</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-8.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-8">
+Past versions of unnamed-chunk-7-8.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-8" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/2a497f2b64ce6af5fb27355d3f30e16c851db8bc/docs/figure/application_B_cells_v2.Rmd/unnamed-chunk-7-8.png" target="_blank">2a497f2</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-9.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-9">
+Past versions of unnamed-chunk-7-9.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-9" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/2a497f2b64ce6af5fb27355d3f30e16c851db8bc/docs/figure/application_B_cells_v2.Rmd/unnamed-chunk-7-9.png" target="_blank">2a497f2</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>plot_by_gene(data=data.jr, s=s, res.pois1=pois.ruv.v1, res.pois2=pois.ruv.v2, res.mash=mash.cb$result, genename=&quot;Lmo7&quot;, cols.trt=cols.trt)</code></pre>
-<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-10.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-11.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-12.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-10.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-10">
+Past versions of unnamed-chunk-7-10.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-10" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/2a497f2b64ce6af5fb27355d3f30e16c851db8bc/docs/figure/application_B_cells_v2.Rmd/unnamed-chunk-7-10.png" target="_blank">2a497f2</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-11.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-11">
+Past versions of unnamed-chunk-7-11.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-11" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/2a497f2b64ce6af5fb27355d3f30e16c851db8bc/docs/figure/application_B_cells_v2.Rmd/unnamed-chunk-7-11.png" target="_blank">2a497f2</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-12.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-12">
+Past versions of unnamed-chunk-7-12.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-12" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/2a497f2b64ce6af5fb27355d3f30e16c851db8bc/docs/figure/application_B_cells_v2.Rmd/unnamed-chunk-7-12.png" target="_blank">2a497f2</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>plot_by_gene(data=data.jr, s=s, res.pois1=pois.ruv.v1, res.pois2=pois.ruv.v2, res.mash=mash.cb$result, genename=&quot;Irf7&quot;, cols.trt=cols.trt)</code></pre>
-<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-13.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-14.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-15.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-13.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-13">
+Past versions of unnamed-chunk-7-13.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-13" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/2a497f2b64ce6af5fb27355d3f30e16c851db8bc/docs/figure/application_B_cells_v2.Rmd/unnamed-chunk-7-13.png" target="_blank">2a497f2</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-14.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-14">
+Past versions of unnamed-chunk-7-14.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-14" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/2a497f2b64ce6af5fb27355d3f30e16c851db8bc/docs/figure/application_B_cells_v2.Rmd/unnamed-chunk-7-14.png" target="_blank">2a497f2</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-15.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-15">
+Past versions of unnamed-chunk-7-15.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-15" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/2a497f2b64ce6af5fb27355d3f30e16c851db8bc/docs/figure/application_B_cells_v2.Rmd/unnamed-chunk-7-15.png" target="_blank">2a497f2</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>plot_by_gene(data=data.jr, s=s, res.pois1=pois.ruv.v1, res.pois2=pois.ruv.v2, res.mash=mash.cb$result, genename=&quot;Oasl2&quot;, cols.trt=cols.trt)</code></pre>
-<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-16.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-17.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-18.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-16.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-16">
+Past versions of unnamed-chunk-7-16.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-16" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/2a497f2b64ce6af5fb27355d3f30e16c851db8bc/docs/figure/application_B_cells_v2.Rmd/unnamed-chunk-7-16.png" target="_blank">2a497f2</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-17.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-17">
+Past versions of unnamed-chunk-7-17.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-17" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/2a497f2b64ce6af5fb27355d3f30e16c851db8bc/docs/figure/application_B_cells_v2.Rmd/unnamed-chunk-7-17.png" target="_blank">2a497f2</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-18.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-18">
+Past versions of unnamed-chunk-7-18.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-18" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/2a497f2b64ce6af5fb27355d3f30e16c851db8bc/docs/figure/application_B_cells_v2.Rmd/unnamed-chunk-7-18.png" target="_blank">2a497f2</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>plot_by_gene(data=data.jr, s=s, res.pois1=pois.ruv.v1, res.pois2=pois.ruv.v2, res.mash=mash.cb$result, genename=&quot;Lgals3bp&quot;, cols.trt=cols.trt)</code></pre>
-<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-19.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-20.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-21.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-19.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-19">
+Past versions of unnamed-chunk-7-19.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-19" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/2a497f2b64ce6af5fb27355d3f30e16c851db8bc/docs/figure/application_B_cells_v2.Rmd/unnamed-chunk-7-19.png" target="_blank">2a497f2</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-20.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-20">
+Past versions of unnamed-chunk-7-20.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-20" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/2a497f2b64ce6af5fb27355d3f30e16c851db8bc/docs/figure/application_B_cells_v2.Rmd/unnamed-chunk-7-20.png" target="_blank">2a497f2</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-21.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-21">
+Past versions of unnamed-chunk-7-21.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-21" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/2a497f2b64ce6af5fb27355d3f30e16c851db8bc/docs/figure/application_B_cells_v2.Rmd/unnamed-chunk-7-21.png" target="_blank">2a497f2</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>plot_by_gene(data=data.jr, s=s, res.pois1=pois.ruv.v1, res.pois2=pois.ruv.v2, res.mash=mash.cb$result, genename=&quot;Parp9&quot;, cols.trt=cols.trt)</code></pre>
-<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-22.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-23.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-24.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-22.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-22">
+Past versions of unnamed-chunk-7-22.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-22" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/2a497f2b64ce6af5fb27355d3f30e16c851db8bc/docs/figure/application_B_cells_v2.Rmd/unnamed-chunk-7-22.png" target="_blank">2a497f2</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-23.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-23">
+Past versions of unnamed-chunk-7-23.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-23" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/2a497f2b64ce6af5fb27355d3f30e16c851db8bc/docs/figure/application_B_cells_v2.Rmd/unnamed-chunk-7-23.png" target="_blank">2a497f2</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-24.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-24">
+Past versions of unnamed-chunk-7-24.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-24" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/2a497f2b64ce6af5fb27355d3f30e16c851db8bc/docs/figure/application_B_cells_v2.Rmd/unnamed-chunk-7-24.png" target="_blank">2a497f2</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>plot_by_gene(data=data.jr, s=s, res.pois1=pois.ruv.v1, res.pois2=pois.ruv.v2, res.mash=mash.cb$result, genename=&quot;Mndal&quot;, cols.trt=cols.trt)</code></pre>
-<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-25.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-26.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-27.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-25.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-25">
+Past versions of unnamed-chunk-7-25.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-25" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/2a497f2b64ce6af5fb27355d3f30e16c851db8bc/docs/figure/application_B_cells_v2.Rmd/unnamed-chunk-7-25.png" target="_blank">2a497f2</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-26.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-26">
+Past versions of unnamed-chunk-7-26.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-26" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/2a497f2b64ce6af5fb27355d3f30e16c851db8bc/docs/figure/application_B_cells_v2.Rmd/unnamed-chunk-7-26.png" target="_blank">2a497f2</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-27.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-27">
+Past versions of unnamed-chunk-7-27.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-27" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/2a497f2b64ce6af5fb27355d3f30e16c851db8bc/docs/figure/application_B_cells_v2.Rmd/unnamed-chunk-7-27.png" target="_blank">2a497f2</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>plot_by_gene(data=data.jr, s=s, res.pois1=pois.ruv.v1, res.pois2=pois.ruv.v2, res.mash=mash.cb$result, genename=&quot;Sp100&quot;, cols.trt=cols.trt)</code></pre>
-<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-28.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-29.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-30.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-28.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-28">
+Past versions of unnamed-chunk-7-28.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-28" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/2a497f2b64ce6af5fb27355d3f30e16c851db8bc/docs/figure/application_B_cells_v2.Rmd/unnamed-chunk-7-28.png" target="_blank">2a497f2</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-29.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-29">
+Past versions of unnamed-chunk-7-29.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-29" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/2a497f2b64ce6af5fb27355d3f30e16c851db8bc/docs/figure/application_B_cells_v2.Rmd/unnamed-chunk-7-29.png" target="_blank">2a497f2</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/application_B_cells_v2.Rmd/unnamed-chunk-7-30.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-30">
+Past versions of unnamed-chunk-7-30.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-30" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/2a497f2b64ce6af5fb27355d3f30e16c851db8bc/docs/figure/application_B_cells_v2.Rmd/unnamed-chunk-7-30.png" target="_blank">2a497f2</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
