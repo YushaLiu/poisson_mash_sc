@@ -38,9 +38,9 @@ We also implemented the best-performing methods identified by this comprehensive
 ## Simulation scenarios
 To simulate single cell data, we started with a subset of the single cell cytokines data. We first randomly permuted the cells with respect to the condition labels to create null data, then used thinning to add condition effects $\beta_{jr} \sim \sum_k \pi_k MVN(0, U_k)$ to a subset of genes, where the prior covariances $U_k$'s are learned from the poisson mash fit to a subset of B cells in the original dataset, with the effect size (in terms of $\max_r \mid \beta_{jr}\mid$) further scaled to be realistic. We started with the following subsets of the real data, and removed genes with fewer than 25 counts summed over all cells.
 
-\noindent Setting 1: a subset of B cells with 8,358 genes and 2,096 cells from 25 cytokine treatments.
+\noindent Setting 1: a subset of B cells with 10,691 genes and 15,705 cells from 25 cytokine treatments.
 
-\noindent Setting 2: a larger subset of B cells with 10,691 genes and 15,705 cells from 25 cytokine treatments.
+\noindent Setting 2: a smaller subset of B cells with 8,358 genes and 2,096 cells from 25 cytokine treatments.
 
 \noindent Setting 3: a subset of cells from "Ctrl2" with 9,041 genes and 2,182 cells from 8 cell types. Since the DE analysis results across cell types, which are themselves identified based on gene expression profiles, are dubious without appropriate correction, we only assessed the performance of methods on simulated null data under this scenario. 
 
