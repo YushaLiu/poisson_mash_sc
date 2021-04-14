@@ -59,12 +59,12 @@ plot(1:20, ELBOs, type="p", xaxt="n", xlab="epsilon2", ylab="ELBO", main="ELBO a
 axis(1, at=1:20, labels=formatC(epsilon2_list, format = "e", digits = 0), las=2)
 
 ```
-The ELBO peaks at $\epsilon^2 = 1.8e-5$, and the largest ELBO is -171230.3. For $\epsilon^2 = 1.4e-3$, ELBO is -171263.0. For $\epsilon^2 = 1.3e-2$, ELBO is -171313.8. However, we found that adding an $\epsilon^2 \approx 1e-4$ doesn't seem to effectively solve the tight error bar issue. 
+The ELBO peaks at $\epsilon^2$ = 1.8e-5, and the largest ELBO is -171230.3. For $\epsilon^2$ = 1.4e-3, ELBO is -171263.0. For $\epsilon^2$ = 1.3e-2, ELBO is -171313.8. However, we found that adding an $\epsilon^2 \le$ 1e-4 doesn't seem to effectively solve the tight error bar issue. 
 
 
 
 ## Running poisson mash ruv
-We then fit poisson mash ruv to the entire dataset, with $\epsilon^2 = 1e-2$.
+We then fit poisson mash ruv to the entire dataset, with $\epsilon^2$ = 1e-2.
 ```{r warning=FALSE, message=FALSE}
 ## load in the poisson mash ruv fit
 res <- readRDS("../applications_sc/B_cells/pois_mash_ruv_fit_v5.Rds")
