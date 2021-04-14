@@ -12,7 +12,7 @@
 <meta name="author" content="Yusha Liu" />
 
 
-<title>Application of poisson mash and competing methods to simulated single cell data</title>
+<title>Application of poisson mash ruv to Ly6C+ monocytes in single cell cytokines data</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -385,9 +385,9 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Application of poisson mash and competing methods to simulated single cell data</h1>
+<h1 class="title toc-ignore">Application of poisson mash ruv to Ly6C+ monocytes in single cell cytokines data</h1>
 <h4 class="author">Yusha Liu</h4>
-<h4 class="date">2021-3-30</h4>
+<h4 class="date">2021-4-14</h4>
 
 </div>
 
@@ -539,7 +539,7 @@ Note that any generated files, e.g. HTML, png, CSS, etc., are not included in t
 <div id="versions" class="tab-pane fade">
 
 <p>
-These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/simulations.Rmd</code>) and HTML (<code>docs/simulations.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/application_Ly6C_pos_v2.Rmd</code>) and HTML (<code>docs/application_Ly6C_pos_v2.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
 </p>
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
@@ -568,7 +568,7 @@ Message
 Rmd
 </td>
 <td>
-<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/36caa0ed3cb811d7fc653a8c70a390e20aae45ac/analysis/simulations.Rmd" target="_blank">36caa0e</a>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/36caa0ed3cb811d7fc653a8c70a390e20aae45ac/analysis/application_Ly6C_pos_v2.Rmd" target="_blank">36caa0e</a>
 </td>
 <td>
 yushaliu
@@ -580,40 +580,6 @@ yushaliu
 update poisson mash ruv results
 </td>
 </tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/YushaLiu/poisson_mash_sc/773b5b62cdacf0f9f10483527797bbc71a3c541c/docs/simulations.html" target="_blank">773b5b6</a>
-</td>
-<td>
-yushaliu
-</td>
-<td>
-2021-03-31
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/29e00976f397df86396aa0f7c15f993eceef182d/analysis/simulations.Rmd" target="_blank">29e0097</a>
-</td>
-<td>
-yushaliu
-</td>
-<td>
-2021-03-31
-</td>
-<td>
-Update results for poisson mash ruv on scdata
-</td>
-</tr>
 </tbody>
 </table>
 </div>
@@ -621,244 +587,168 @@ Update results for poisson mash ruv on scdata
 </div>
 </div>
 </div>
-<div id="description-of-approaches" class="section level2">
-<h2>Description of approaches</h2>
-<div id="mash-based-approaches" class="section level3">
-<h3>MASH-based approaches:</h3>
-<p>1. poisson mash: fit poisson mash with gene-specific means and random effects to the count data while not accounting for unwanted variation.</p>
-<p>2. poisson mash ruv: fit poisson mash with gene-specific means and random effects to the count data while accounting for unwanted variation. For ruv, the <span class="math inline">\(J \times D\)</span> factor matrix is estimated using <a href="https://cran.r-project.org/web/packages/glmpca/index.html">GLMPCA</a> while protecting the condition-specific effects.</p>
-<p>3. mash: fit mash with gene-specific means and random effects to the gene expression data normalized using <a href="https://satijalab.org/seurat/">Seurat</a> while not accounting for unwanted variation. We set <span class="math inline">\(\alpha = 1\)</span>, i.e., the EZ model.</p>
-<p>4. mash ruv: fit mash with gene-specific means and random effects to the normalized data while accounting for unwanted variation. For ruv, the <span class="math inline">\(J \times D\)</span> factor matrix is estimated using <a href="https://github.com/willwerscheid/flashier">flashier</a> while protecting the condition-specific effects. We set <span class="math inline">\(\alpha = 1\)</span>, i.e., the EZ model.</p>
-<p>5. mash cb: fit mash with no common baseline to the normalized data using <a href="https://stephenslab.github.io/mashr/articles/intro_mashnobaseline.html">mashr</a>, where the reference is the mean over all conditions. We set <span class="math inline">\(\alpha = 1\)</span>, i.e., the EZ model. The implementation is similar to method 3 but without the random effect term. Also, the selection of “strong” subset of genes in the ED step is conducted differently.</p>
-</div>
-<div id="benchmark-approaches" class="section level3">
-<h3>Benchmark approaches:</h3>
-<p>We also implemented the best-performing methods identified by this comprehensive <a href="https://www.nature.com/articles/nmeth.4612.pdf?origin=ppub">benchmark paper</a>, which evaluated 36 approaches that have been developed for DE analysis on bulk RNA-seq data or scRNA-seq data. We only considered methods that allow for comparison across multiple (<span class="math inline">\(&gt;2\)</span>) conditions, and performed an ANOVA-like test for differences between any of the conditions. With each approach, we obtained a gene-wise p-value adjusted for multiple comparisons based on FDR.</p>
-<p>6. <a href="https://link.springer.com/protocol/10.1007/978-1-4939-3578-9_19">edgeR-QLF-DetRate</a>: fit a quasi-likelihood negative binomial generalized log-linear model to the count data which includes the cellular detection rate (the fraction of genes that are detected with nonzero counts) as a covariate in the model.</p>
-<p>7. <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-015-0844-5">MAST-cpm-DetRate</a>: fit a two-part generalized linear model to test DE, with one component modeling the discrete expression rate of each gene across cells and the other component modeling the conditional continuous expression level. The cellular detection rate is included as a covariate in the model.</p>
-<p>8. <a href="http://www.bioconductor.org/packages/devel/bioc//manuals/limma/man/limma.pdf">limma-trend</a>: fit limma-trend to the <span class="math inline">\(\log_2\)</span> transformed CPM data.</p>
-<p>9. <a href="https://en.wikipedia.org/wiki/Kruskal–Wallis_one-way_analysis_of_variance">Kruskal-Wallis test</a>: perform Kruskal-Wallis test for DE analysis, which is a non-parametric analogue of ANOVA.</p>
-</div>
-</div>
-<div id="simulation-scenarios" class="section level2">
-<h2>Simulation scenarios</h2>
-<p>To simulate single cell data, we started with a subset of the single cell cytokines data. We first randomly permuted the cells with respect to the condition labels to create null data, then used thinning to add condition effects <span class="math inline">\(\beta_{jr} \sim \sum_k \pi_k MVN(0, U_k)\)</span> to a subset of genes, where the prior covariances <span class="math inline">\(U_k\)</span>’s are learned from the poisson mash fit to a subset of B cells in the original dataset, with the effect size (in terms of <span class="math inline">\(\max_r \mid \beta_{jr}\mid\)</span>) further scaled to be realistic. We started with the following subsets of the real data, and removed genes with fewer than 25 counts summed over all cells.</p>
-<p>Setting 1: a subset of B cells with 10,691 genes and 15,705 cells from 25 cytokine treatments.</p>
-<p>Setting 2: a smaller subset of B cells with 8,358 genes and 2,096 cells from 25 cytokine treatments.</p>
-<p>Setting 3: a subset of cells from “Ctrl2” with 9,041 genes and 2,182 cells from 8 cell types. Since the DE analysis results across cell types, which are themselves identified based on gene expression profiles, are dubious without appropriate correction, we only assessed the performance of methods on simulated null data under this scenario.</p>
-<p>We simulate 20 single cell datasets for each scenario.</p>
-</div>
-<div id="simulation-results-for-null-data" class="section level2">
-<h2>Simulation results for null data</h2>
-<div id="setting-1" class="section level3">
-<h3>Setting 1</h3>
-<pre class="r"><code>### read in result summary
-num_effects &lt;- readRDS(&quot;../simulations_sc/setting1/sim_null_summary.Rds&quot;)
+<div id="summary" class="section level2">
+<h2>Summary</h2>
+<p>We apply poisson mash ruv and mash to a subset of Ly6C+ monocytes from a single cell cytokines dataset, where the conditions represent different types of cytokine treatments (<span class="math inline">\(R=46\)</span>). This dataset includes expression data of <span class="math inline">\(J=10,417\)</span> genes from <span class="math inline">\(4,354\)</span> cells. Genes with fewer than <span class="math inline">\(25\)</span> counts summed over all cells are removed.</p>
+<pre class="r"><code>library(pheatmap)
+library(gridExtra)
 
-### number of false positives
-num_effects</code></pre>
-<pre><code>                 rep1 rep2 rep3 rep4 rep5 rep6 rep7 rep8 rep9 rep10 rep11 rep12
-edgeRQLFDetRate    83   88   75   90   78   93   65   89   92    75    93   102
-MASTcpmDetRate      1    1    0    2    0    0    0    0    1     0     2     1
-limma-trend         1    1    0    3    0    0    0    0    1     0     2     0
-KW-test             0    0    0    2    0    0    0    0    0     0     2     0
-mash               11   11   13   11    3    7    7    5   12     5     7    11
-mash cb            16   11   21   14    8   10   16   13   14     9    12    15
-mash ruv           12   12   13   11    7   11    9   11   16     8    11    13
-poisson mash       13   26   11   34   31   42   16   23   22    20    24    54
-poisson mash ruv   11   25    7   36    9    9   10    8   10    13    26     9
-                 rep13 rep14 rep15 rep16 rep17 rep18 rep19 rep20
-edgeRQLFDetRate     93    67    80    90    84    90    91    92
-MASTcpmDetRate       1     0     0     0     1     1     0     1
-limma-trend          0     0     0     0     0     1     0     0
-KW-test              0     0     0     1     1     1     0     1
-mash                 3    12     6    11     9    16    14    15
-mash cb              9    13    12    11    15    19    16    14
-mash ruv             6    19     9    13    12    21    17    17
-poisson mash        16    12    17    24    38    11    25    16
-poisson mash ruv     8     9     9     9    20     8    23     6</code></pre>
+cols.trt &lt;- readRDS(&quot;../applications_sc/B_cells/condition_colors.Rds&quot;)
+trts &lt;- names(cols.trt)</code></pre>
 </div>
-<div id="setting-2" class="section level3">
-<h3>Setting 2</h3>
-<pre class="r"><code>### read in result summary
-num_effects &lt;- readRDS(&quot;../simulations_sc/setting2/sim_null_summary.Rds&quot;)
+<div id="running-ed-step" class="section level2">
+<h2>Running ED step</h2>
+<p>To estimate the data-driven prior covariances, we fit poisson mash ruv without scaling parameters to a subset of genes that are identified to be differentially expressed across conditions by a conditional multinomial goodness-of-fit test. Compared to the previous implementation, the <span class="math inline">\(R\)</span> canonical prior covariances modeling the condition-specific effects are also included in the ED step with their scaling parameters to be estimated. We expect that in the presence of these canonical prior covariances, we can better estimate the data-driven prior covariances which capture the effect-sharing patterns across conditions in the data.</p>
+<pre class="r"><code>## load in the ED results
+fit.ed &lt;- readRDS(&quot;../applications_sc/Ly6C+/pois_mash_ruv_ed_v3.Rds&quot;)
 
-### number of false positives
-num_effects</code></pre>
-<pre><code>                 rep1 rep2 rep3 rep4 rep5 rep6 rep7 rep8 rep9 rep10 rep11 rep12
-edgeRQLFDetRate    35   25   23   24   26   30   24   21   23    22    32    27
-MASTcpmDetRate      3    3    0    1    3    0    1    1    4     1     1     1
-limma-trend         6    4    0    0    3    0    3    1    7     0     1     0
-KW-test             2    1    0    0    3    0    2    1    6     0     1     1
-mash               19   25   23   15   20    7   22   30   23    35    20    19
-mash cb            24   24   23   31   25   12   32   28   21    35    29    19
-mash ruv           20   22   24   13   21    9   23   29   20    36    23    22
-poisson mash       13   10   19   81   24   23    9   24   23    18    22    40
-poisson mash ruv   13    8    7    7    7   11    7   16    8     5     5     6
-                 rep13 rep14 rep15 rep16 rep17 rep18 rep19 rep20
-edgeRQLFDetRate     42    26    24    25    19    19    24    23
-MASTcpmDetRate       0     0     3     2     1     1     1     1
-limma-trend          0     0     3     2     1     1     0     1
-KW-test              0     0     3     2     1     0     3     1
-mash                15    17    21    16    14    33    21    36
-mash cb             18    22    15    17    23    31    20    40
-mash ruv            13    14    21    15    17    33    22    39
-poisson mash        26    28    33    51    54    20    22    23
-poisson mash ruv    11    11     8    10    10    10     9    10</code></pre>
+## running time per iteration in ED
+fit.ed$runtime/length(fit.ed$ELBO)</code></pre>
+<pre><code>      user     system    elapsed 
+207.992931   1.559815 209.636567 </code></pre>
+<pre class="r"><code>## look at the ELBO
+plot(fit.ed$ELBO, xlab = &quot;niter&quot;, ylab = &quot;elbo&quot;, main=&quot;fitting ED step&quot;)</code></pre>
+<p><img src="figure/application_Ly6C_pos_v2.Rmd/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
-<div id="setting-3" class="section level3">
-<h3>Setting 3</h3>
-<pre class="r"><code>### read in result summary
-num_effects &lt;- readRDS(&quot;../simulations_sc/setting3/sim_null_summary.Rds&quot;)
+<div id="adding-epsilon2-to-the-diagonals-of-rank-1-prior-covariances" class="section level2">
+<h2>Adding epsilon2 to the diagonals of rank-1 prior covariances</h2>
+<p>For genes whose posterior weights concentrate on rank-1 prior covariances (mostly data-driven ones), the poisson mash ruv fit often produces <a href="https://yushaliu.github.io/poisson_mash_sc/application_B_cells.html#A_few_examples">unrealistically tight credible intervals</a> for the condition-specific effects. To alleviate this, we added a small positive number, denoted by <span class="math inline">\(\epsilon^2\)</span>, to the diagonals of the rank-1 prior covariances that receive non-negligible prior weights (&gt; 1%) in the ED step. To determine the size of <span class="math inline">\(\epsilon^2\)</span> that should be added, we refitted the ED step by replacing these rank-1 prior covariances <span class="math inline">\(u_k u_k&#39;\)</span> with <span class="math inline">\(u_k u_k&#39; + \epsilon^2 I\)</span> (here <span class="math inline">\(u_k\)</span> is normalized such that its largest element is 1), and plotted the ELBO as a function of <span class="math inline">\(\epsilon^2\)</span>.</p>
+<pre class="r"><code>### load in the ED fit corresponding to different values of epsilon2
+log2_epsilon2_list &lt;- seq(log2(1e-6), log2(1), length.out = 20)
+epsilon2_list &lt;- 2^log2_epsilon2_list
+ELBOs &lt;- rep(NA, 20)
 
-### number of false positives
-num_effects</code></pre>
-<pre><code>                 rep1 rep2 rep3 rep4 rep5 rep6 rep7 rep8 rep9 rep10 rep11 rep12
-edgeRQLFDetRate    46   35   55   57   44   92   47   62   41    55    58    31
-MASTcpmDetRate     50   33   43   40   32   30   47   45   37    37    52    26
-limma-trend        22    1   10    7    4    7   22   14    8     7    23     8
-KW-test            10    1    1   13    2    1    3    2    4    10     7     5
-mash                0    0    0    0    0    0    0    0    0     0     0     0
-mash cb            30   23   52   11   27   48   39   46   35    16    29    20
-mash ruv            0    0    0    0    0    0    0    0    0     0     0     0
-poisson mash       84   10   46   73  110  188   26  140   15    73    47    36
-poisson mash ruv    9    3   11   13    5   14    6    5    5     6     8     2
-                 rep13 rep14 rep15 rep16 rep17 rep18 rep19 rep20
-edgeRQLFDetRate     48    45    38    79    81    62    48    60
-MASTcpmDetRate      41    45    35    50    51    40    45    44
-limma-trend          7    15    12    12    14    12     5    10
-KW-test             22    13     4     9     5     3    11     8
-mash                 0     0     0     0     0     0     0     0
-mash cb             12    22    25    16    90    60    22    48
-mash ruv             0     0     0     0     0     0     0     0
-poisson mash        96   114    74   146   143   100    33   120
-poisson mash ruv     6     1     6     1     2     2     4    13</code></pre>
-</div>
-</div>
-<div id="effect-sharing-patterns-across-conditions-for-non-null-data" class="section level2">
-<h2>Effect-sharing patterns across conditions for non-null data</h2>
-<pre class="r"><code>cols.trt &lt;- readRDS(&quot;../simulations_sc/setting2/condition_colors.Rds&quot;)
-ulist.sim &lt;- readRDS(&quot;../simulations_sc/setting2/ulist_sim.rds&quot;)
+for(l in 1:20){
+  fit.ed.l &lt;- readRDS(paste0(&quot;../applications_sc/Ly6C+/epsilon2_estimation/pois_mash_ruv_ed_&quot;, l, &quot;.Rds&quot;))
+  ELBOs[l] &lt;- fit.ed.l$ELBO[length(fit.ed.l$ELBO)]
+}
 
-for (k in 1:length(ulist.sim$ulist)){
-  v &lt;- pmax(ulist.sim$ulist[[k]], 0)
+
+### look at the epsilon2 and ELBOs
+formatC(epsilon2_list, format = &quot;e&quot;, digits = 1)</code></pre>
+<pre><code> [1] &quot;1.0e-06&quot; &quot;2.1e-06&quot; &quot;4.3e-06&quot; &quot;8.9e-06&quot; &quot;1.8e-05&quot; &quot;3.8e-05&quot; &quot;7.8e-05&quot;
+ [8] &quot;1.6e-04&quot; &quot;3.4e-04&quot; &quot;7.0e-04&quot; &quot;1.4e-03&quot; &quot;3.0e-03&quot; &quot;6.2e-03&quot; &quot;1.3e-02&quot;
+[15] &quot;2.6e-02&quot; &quot;5.5e-02&quot; &quot;1.1e-01&quot; &quot;2.3e-01&quot; &quot;4.8e-01&quot; &quot;1.0e+00&quot;</code></pre>
+<pre class="r"><code>ELBOs</code></pre>
+<pre><code> [1] -333056.5 -333046.8 -333050.3 -333051.3 -333050.6 -333054.7 -333039.4
+ [8] -333051.8 -333044.1 -333055.1 -333082.6 -333152.5 -333300.1 -333510.4
+[15] -333712.0 -333955.6 -334494.2 -334696.7 -334781.6 -334620.1</code></pre>
+<pre class="r"><code>### plot ELBO as a function of epsilon2
+plot(1:20, ELBOs, type=&quot;p&quot;, xaxt=&quot;n&quot;, xlab=&quot;epsilon2&quot;, ylab=&quot;ELBO&quot;, main=&quot;ELBO as a function of epsilon2 in the ED step&quot;)
+axis(1, at=1:20, labels=formatC(epsilon2_list, format = &quot;e&quot;, digits = 0), las=2)</code></pre>
+<p><img src="figure/application_Ly6C_pos_v2.Rmd/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /> The ELBO peaks at <span class="math inline">\(\epsilon^2 = 7.8e-5\)</span>, and the largest ELBO is -333039.4. For <span class="math inline">\(\epsilon^2 = 1.4e-3\)</span>, ELBO is -333082.6. For <span class="math inline">\(\epsilon^2 = 1.3e-2\)</span>, ELBO is -333510.4. However, we found that adding an <span class="math inline">\(\epsilon^2 \approx 1e-4\)</span> doesn’t seem to effectively solve the tight error bar issue.</p>
+</div>
+<div id="running-poisson-mash-ruv" class="section level2">
+<h2>Running poisson mash ruv</h2>
+<p>We then fit poisson mash ruv to the entire dataset, with <span class="math inline">\(\epsilon^2 = 1e-2\)</span>.</p>
+<pre class="r"><code>## load in the poisson mash ruv fit
+res &lt;- readRDS(&quot;../applications_sc/Ly6C+/pois_mash_ruv_fit_v5.Rds&quot;)
+
+## running time
+res$runtime</code></pre>
+<pre><code>     user    system   elapsed 
+74354.880   767.362 75171.108 </code></pre>
+<pre class="r"><code>## look at ELBO
+plot(res$ELBO, xlab = &quot;niter&quot;, ylab = &quot;elbo&quot;, main=&quot;Fitting poisson mash ruv&quot;)</code></pre>
+<p><img src="figure/application_Ly6C_pos_v2.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>## calculate prior weights
+pi.mat &lt;- matrix(res$pi, ncol=length(res$wlist), byrow=TRUE)
+
+rownames(pi.mat) &lt;- c(names(res$Ulist), names(res$ulist))
+colnames(pi.mat) &lt;- paste0(&quot;w=&quot;, round(res$wlist, 3))
+pheatmap(pi.mat, cluster_rows=FALSE, cluster_cols=FALSE, fontsize_row = 6, fontsize_col=6, 
+         main=&quot;Estimated weights of prior covariances in poisson mash ruv&quot;)</code></pre>
+<p><img src="figure/application_Ly6C_pos_v2.Rmd/unnamed-chunk-4-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>rowSums(pi.mat, 3)</code></pre>
+<pre><code>        tPCA      Emp_cov         PC_1         PC_2         PC_3         PC_4 
+3.978301e-01 4.116946e-03 9.192518e-02 1.139305e-01 8.664546e-02 2.785193e-01 
+        PC_5          e_1          e_2          e_3          e_4          e_5 
+2.344388e-02 2.000000e-05 1.106950e-04 2.000000e-05 2.000000e-05 2.000000e-05 
+         e_6          e_7          e_8          e_9         e_10         e_11 
+2.000000e-05 2.000000e-05 2.000000e-05 2.000000e-05 2.000000e-05 2.000000e-05 
+        e_12         e_13         e_14         e_15         e_16         e_17 
+2.000000e-05 2.000000e-05 2.000000e-05 3.282519e-04 2.420417e-03 2.000000e-05 
+        e_18         e_19         e_20         e_21         e_22         e_23 
+2.000000e-05 2.000000e-05 2.000000e-05 2.000000e-05 5.152747e-05 2.000000e-05 
+        e_24         e_25         e_26         e_27         e_28         e_29 
+2.000000e-05 2.000000e-05 2.221697e-05 2.000000e-05 2.000000e-05 2.000000e-05 
+        e_30         e_31         e_32         e_33         e_34         e_35 
+2.000000e-05 2.000000e-05 2.000000e-05 2.000000e-05 2.000000e-05 2.000000e-05 
+        e_36         e_37         e_38         e_39         e_40         e_41 
+2.000000e-05 2.000000e-05 2.000000e-05 2.000000e-05 2.000000e-05 2.000000e-05 
+        e_42         e_43         e_44         e_45         e_46          e_0 
+2.000000e-05 2.000000e-05 2.000000e-05 2.000000e-05 2.000000e-05 2.000000e-05 </code></pre>
+</div>
+<div id="estimate-of-data-driven-covariances-from-ed-step" class="section level2">
+<h2>Estimate of data-driven covariances from ED step</h2>
+<pre class="r"><code>### Estimate of top eigenvectors of the data-driven covariance initialized by rank-5 PCA
+eig.tPCA &lt;- eigen(fit.ed$Ulist[[1]])
+pve.tPCA &lt;- eig.tPCA$values/sum(eig.tPCA$values)
+
+for (k in 1:2){
+  v &lt;- eig.tPCA$vectors[,k]
   
-  barplot(v/v[which.max(abs(v))], names = names(cols.trt), cex.names = 0.8, las = 2, main = paste0(&quot;Effect-sharing pattern: u&quot;, k), col = cols.trt)
+  barplot(v/v[which.max(abs(v))], names = names(cols.trt), cex.names = 0.5, las = 2, 
+          main = paste0(names(fit.ed$Ulist)[1], &quot;: weight &quot;, round(rowSums(pi.mat)[1],3), 
+                        &quot;:\nEigenvector &quot;, k, &quot; (pve = &quot;, round(pve.tPCA[k],3), &quot;)&quot;), col = cols.trt)
 }</code></pre>
-<p><img src="figure/simulations.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-1">
-Past versions of unnamed-chunk-4-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-4-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/773b5b62cdacf0f9f10483527797bbc71a3c541c/docs/figure/simulations.Rmd/unnamed-chunk-4-1.png" target="_blank">773b5b6</a>
-</td>
-<td>
-yushaliu
-</td>
-<td>
-2021-03-31
-</td>
-</tr>
-</tbody>
-</table>
+<p><img src="figure/application_Ly6C_pos_v2.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_Ly6C_pos_v2.Rmd/unnamed-chunk-5-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>### Estimate of top eigenvectors of rank-1 data-driven covariance matrices
+for (k in 1:length(fit.ed$ulist)){
+  if(rowSums(pi.mat)[k+2] &gt; 5e-2 &amp; sum(fit.ed$ulist[[k]]!=0)&gt;0){
+    v &lt;- as.numeric(fit.ed$ulist[[k]])
+    barplot(v/v[which.max(abs(v))], names = names(cols.trt), cex.names = 0.5, las = 2, col = cols.trt,
+            main = paste0(names(fit.ed$ulist)[k], &quot;: weight &quot;, round(rowSums(pi.mat)[k+2],3)))    
+  }
+}</code></pre>
+<p><img src="figure/application_Ly6C_pos_v2.Rmd/unnamed-chunk-5-3.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_Ly6C_pos_v2.Rmd/unnamed-chunk-5-4.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_Ly6C_pos_v2.Rmd/unnamed-chunk-5-5.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_Ly6C_pos_v2.Rmd/unnamed-chunk-5-6.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
+<div id="comparison-to-poisson-mash-ruv-fit-without-adding-epsilon2" class="section level2">
+<h2>Comparison to poisson mash ruv fit without adding epsilon2</h2>
+<p>We also implemented poisson mash ruv without adding <span class="math inline">\(\epsilon^2\)</span> to the diagonals of rank-1 prior covariances, and compared the identified DE genes to the results of the poisson mash ruv fit with <span class="math inline">\(\epsilon^2=1e-2\)</span>. We also implemented mash without common baseline to the gene expression data normalized using <a href="https://satijalab.org/seurat/">Seurat</a>. For all implementations, the reference is the mean over all 46 conditions.</p>
+<pre class="r"><code>### load in the different versions of model fit
+pois.ruv.v1 &lt;- readRDS(&quot;../applications_sc/Ly6C+/pois_mash_ruv_posterior_v3.Rds&quot;)
+pois.ruv.v2 &lt;- readRDS(&quot;../applications_sc/Ly6C+/pois_mash_ruv_posterior_v5.Rds&quot;)
+mash.cb &lt;- readRDS(&quot;../applications_sc/Ly6C+/mash_common_baseline.Rds&quot;)
+
+### poisson mash ruv without epsilon2 added
+idx1.pois &lt;- which(apply(pois.ruv.v1$lfsr, 1, min) &lt; 0.05)
+length(idx1.pois)</code></pre>
+<pre><code>[1] 2066</code></pre>
+<pre class="r"><code>### poisson mash ruv with epsilon2=1e-2 added
+idx2.pois &lt;- which(apply(pois.ruv.v2$lfsr, 1, min) &lt; 0.05)
+length(idx2.pois)</code></pre>
+<pre><code>[1] 1939</code></pre>
+<pre class="r"><code>### look at the overlap of the two sets of DE genes 
+sum(idx2.pois %in% idx1.pois)</code></pre>
+<pre><code>[1] 1930</code></pre>
+<pre class="r"><code>### mash without common baseline
+idx.mash.cb &lt;- mashr::get_significant_results(mash.cb)
+length(idx.mash.cb)</code></pre>
+<pre><code>[1] 4060</code></pre>
 </div>
-<p><img src="figure/simulations.Rmd/unnamed-chunk-4-2.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-2">
-Past versions of unnamed-chunk-4-2.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-4-2" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/773b5b62cdacf0f9f10483527797bbc71a3c541c/docs/figure/simulations.Rmd/unnamed-chunk-4-2.png" target="_blank">773b5b6</a>
-</td>
-<td>
-yushaliu
-</td>
-<td>
-2021-03-31
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/simulations.Rmd/unnamed-chunk-4-3.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-3">
-Past versions of unnamed-chunk-4-3.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-4-3" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/773b5b62cdacf0f9f10483527797bbc71a3c541c/docs/figure/simulations.Rmd/unnamed-chunk-4-3.png" target="_blank">773b5b6</a>
-</td>
-<td>
-yushaliu
-</td>
-<td>
-2021-03-31
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<div id="a-few-examples" class="section level2">
+<h2>A few examples</h2>
+<pre class="r"><code>### load in the plotting function
+source(&quot;../applications_sc/B_cells/plot_by_gene_v3.R&quot;)
+
+### load in the condition-level count data
+data &lt;- readRDS(&quot;../applications_sc/Ly6C+/data_jr.Rds&quot;)
+data.jr &lt;- data$data.jr
+s &lt;- data$s
+
+plot_by_gene(data=data.jr, s=s, res.pois1=pois.ruv.v1, res.pois2=pois.ruv.v2, res.mash=mash.cb$result, genename=&quot;Stat1&quot;, cols.trt=cols.trt)</code></pre>
+<p><img src="figure/application_Ly6C_pos_v2.Rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_Ly6C_pos_v2.Rmd/unnamed-chunk-7-2.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_Ly6C_pos_v2.Rmd/unnamed-chunk-7-3.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plot_by_gene(data=data.jr, s=s, res.pois1=pois.ruv.v1, res.pois2=pois.ruv.v2, res.mash=mash.cb$result, genename=&quot;Klra2&quot;, cols.trt=cols.trt)</code></pre>
+<p><img src="figure/application_Ly6C_pos_v2.Rmd/unnamed-chunk-7-4.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_Ly6C_pos_v2.Rmd/unnamed-chunk-7-5.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_Ly6C_pos_v2.Rmd/unnamed-chunk-7-6.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plot_by_gene(data=data.jr, s=s, res.pois1=pois.ruv.v1, res.pois2=pois.ruv.v2, res.mash=mash.cb$result, genename=&quot;Fgl2&quot;, cols.trt=cols.trt)</code></pre>
+<p><img src="figure/application_Ly6C_pos_v2.Rmd/unnamed-chunk-7-7.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_Ly6C_pos_v2.Rmd/unnamed-chunk-7-8.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_Ly6C_pos_v2.Rmd/unnamed-chunk-7-9.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plot_by_gene(data=data.jr, s=s, res.pois1=pois.ruv.v1, res.pois2=pois.ruv.v2, res.mash=mash.cb$result, genename=&quot;Tap1&quot;, cols.trt=cols.trt)</code></pre>
+<p><img src="figure/application_Ly6C_pos_v2.Rmd/unnamed-chunk-7-10.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_Ly6C_pos_v2.Rmd/unnamed-chunk-7-11.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_Ly6C_pos_v2.Rmd/unnamed-chunk-7-12.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plot_by_gene(data=data.jr, s=s, res.pois1=pois.ruv.v1, res.pois2=pois.ruv.v2, res.mash=mash.cb$result, genename=&quot;Psmb9&quot;, cols.trt=cols.trt)</code></pre>
+<p><img src="figure/application_Ly6C_pos_v2.Rmd/unnamed-chunk-7-13.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_Ly6C_pos_v2.Rmd/unnamed-chunk-7-14.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_Ly6C_pos_v2.Rmd/unnamed-chunk-7-15.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plot_by_gene(data=data.jr, s=s, res.pois1=pois.ruv.v1, res.pois2=pois.ruv.v2, res.mash=mash.cb$result, genename=&quot;Psmb8&quot;, cols.trt=cols.trt)</code></pre>
+<p><img src="figure/application_Ly6C_pos_v2.Rmd/unnamed-chunk-7-16.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_Ly6C_pos_v2.Rmd/unnamed-chunk-7-17.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_Ly6C_pos_v2.Rmd/unnamed-chunk-7-18.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -882,15 +772,24 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] workflowr_1.6.2
+[1] rmeta_3.0       ggplot2_3.3.3   gridExtra_2.3   pheatmap_1.0.12
+[5] workflowr_1.6.2
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.6      rprojroot_2.0.2 digest_0.6.27   later_1.0.0    
- [5] R6_2.5.0        git2r_0.27.1    magrittr_2.0.1  evaluate_0.14  
- [9] stringi_1.4.6   rlang_0.4.10    fs_1.4.1        promises_1.1.0 
-[13] whisker_0.4     rmarkdown_2.3   tools_3.6.2     stringr_1.4.0  
-[17] glue_1.4.2      httpuv_1.5.2    xfun_0.17       yaml_2.2.1     
-[21] compiler_3.6.2  htmltools_0.4.0 knitr_1.30     </code></pre>
+ [1] tidyselect_1.1.0   xfun_0.17          ashr_2.2-51        purrr_0.3.4       
+ [5] lattice_0.20-41    colorspace_2.0-0   vctrs_0.3.6        htmltools_0.4.0   
+ [9] yaml_2.2.1         rlang_0.4.10       mixsqp_0.3-43      later_1.0.0       
+[13] pillar_1.4.7       glue_1.4.2         withr_2.4.1        RColorBrewer_1.1-2
+[17] lifecycle_0.2.0    mashr_0.2.21       plyr_1.8.6         stringr_1.4.0     
+[21] munsell_0.5.0      gtable_0.3.0       mvtnorm_1.1-1      evaluate_0.14     
+[25] labeling_0.4.2     knitr_1.30         httpuv_1.5.2       invgamma_1.1      
+[29] irlba_2.3.3        Rcpp_1.0.6         promises_1.1.0     scales_1.1.1      
+[33] truncnorm_1.0-8    abind_1.4-5        farver_2.0.3       fs_1.4.1          
+[37] digest_0.6.27      stringi_1.4.6      dplyr_0.8.5        grid_3.6.2        
+[41] rprojroot_2.0.2    tools_3.6.2        magrittr_2.0.1     tibble_3.0.6      
+[45] crayon_1.4.0       whisker_0.4        pkgconfig_2.0.3    ellipsis_0.3.1    
+[49] Matrix_1.2-18      SQUAREM_2021.1     assertthat_0.2.1   rmarkdown_2.3     
+[53] R6_2.5.0           git2r_0.27.1       compiler_3.6.2    </code></pre>
 </div>
 </div>
 
