@@ -118,7 +118,7 @@ for (k in 1:length(fit.ed$ulist)){
 
 
 ## Comparison to poisson mash ruv fit without adding epsilon2
-We also implemented poisson mash ruv without adding $\epsilon^2$ to the diagonals of rank-1 prior covariances, and compared the identified DE genes to the results of the poisson mash ruv fit with $\epsilon^2=1e-2$. We also implemented mash without common baseline to the gene expression data normalized using [Seurat](https://satijalab.org/seurat/). For all implementations, the reference is the mean over all 46 conditions. 
+We also implemented poisson mash ruv without adding $\epsilon^2$ to the diagonals of rank-1 prior covariances, and compared the identified DE genes to the results of the poisson mash ruv fit with $\epsilon^2$=1e-2. We also implemented mash without common baseline to the gene expression data normalized using [Seurat](https://satijalab.org/seurat/). For all implementations, the reference is the mean over all 46 conditions. 
 ```{r warning=FALSE, message=FALSE}
 ### load in the different versions of model fit
 pois.ruv.v1 <- readRDS("../applications_sc/B_cells/pois_mash_ruv_posterior_v3.Rds")
