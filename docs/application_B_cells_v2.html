@@ -503,16 +503,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomYushaLiupoissonmashsctreeb93f61f9ba81df14635225b315619fdb40f93462targetblankb93f61fa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/YushaLiu/poisson_mash_sc/tree/b93f61f9ba81df14635225b315619fdb40f93462" target="_blank">b93f61f</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomYushaLiupoissonmashsctreeaa1a71b02e0eb2d9385d6e25c7e8f8d2e186849btargetblankaa1a71ba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/YushaLiu/poisson_mash_sc/tree/aa1a71b02e0eb2d9385d6e25c7e8f8d2e186849b" target="_blank">aa1a71b</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomYushaLiupoissonmashsctreeb93f61f9ba81df14635225b315619fdb40f93462targetblankb93f61fa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomYushaLiupoissonmashsctreeaa1a71b02e0eb2d9385d6e25c7e8f8d2e186849btargetblankaa1a71ba" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/YushaLiu/poisson_mash_sc/tree/b93f61f9ba81df14635225b315619fdb40f93462" target="_blank">b93f61f</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/YushaLiu/poisson_mash_sc/tree/aa1a71b02e0eb2d9385d6e25c7e8f8d2e186849b" target="_blank">aa1a71b</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -563,6 +563,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/aa1a71b02e0eb2d9385d6e25c7e8f8d2e186849b/analysis/application_B_cells_v2.Rmd" target="_blank">aa1a71b</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-14
+</td>
+<td>
+slight notation change
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/YushaLiu/poisson_mash_sc/38ee26bac21df5454eb03fa5c2a68b6ccfd0d947/docs/application_B_cells_v2.html" target="_blank">38ee26b</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-14
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1076,7 +1110,7 @@ yushaliu
 </div>
 <div id="comparison-to-poisson-mash-ruv-fit-without-adding-epsilon2" class="section level2">
 <h2>Comparison to poisson mash ruv fit without adding epsilon2</h2>
-<p>We also implemented poisson mash ruv without adding <span class="math inline">\(\epsilon^2\)</span> to the diagonals of rank-1 prior covariances, and compared the identified DE genes to the results of the poisson mash ruv fit with <span class="math inline">\(\epsilon^2=1e-2\)</span>. We also implemented mash without common baseline to the gene expression data normalized using <a href="https://satijalab.org/seurat/">Seurat</a>. For all implementations, the reference is the mean over all 46 conditions.</p>
+<p>We also implemented poisson mash ruv without adding <span class="math inline">\(\epsilon^2\)</span> to the diagonals of rank-1 prior covariances, and compared the identified DE genes to the results of the poisson mash ruv fit with <span class="math inline">\(\epsilon^2\)</span>=1e-2. We also implemented mash without common baseline to the gene expression data normalized using <a href="https://satijalab.org/seurat/">Seurat</a>. For all implementations, the reference is the mean over all 46 conditions.</p>
 <pre class="r"><code>### load in the different versions of model fit
 pois.ruv.v1 &lt;- readRDS(&quot;../applications_sc/B_cells/pois_mash_ruv_posterior_v3.Rds&quot;)
 pois.ruv.v2 &lt;- readRDS(&quot;../applications_sc/B_cells/pois_mash_ruv_posterior_v5.Rds&quot;)
