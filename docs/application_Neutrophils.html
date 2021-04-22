@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Yusha Liu" />
+
+
+<title>Application of poisson mash ruv to neutrophils in single cell cytokines data</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">poisson_mash_sc</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/YushaLiu/poisson_mash_sc">
+    <span class="fa fa-github"></span>
+     
+    Source code
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Application of poisson mash ruv to neutrophils in single cell cytokines data</h1>
+<h4 class="author">Yusha Liu</h4>
+<h4 class="date">2021-4-21</h4>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2021-04-22
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>poisson_mash_sc/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.2). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20210330code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20210330)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20210330code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20210330)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomYushaLiupoissonmashsctree531070c4b7f320846487516d55bca0c56a654fc7targetblank531070ca"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/YushaLiu/poisson_mash_sc/tree/531070c4b7f320846487516d55bca0c56a654fc7" target="_blank">531070c</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomYushaLiupoissonmashsctree531070c4b7f320846487516d55bca0c56a654fc7targetblank531070ca" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version <a href="https://github.com/YushaLiu/poisson_mash_sc/tree/531070c4b7f320846487516d55bca0c56a654fc7" target="_blank">531070c</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .DS_Store
+    Ignored:    .Rhistory
+    Ignored:    output/.DS_Store
+
+Untracked files:
+    Untracked:  code/plot_by_gene.R
+
+Unstaged changes:
+    Deleted:    analysis/application_Ly6C+.Rmd
+    Deleted:    analysis/application_Ly6C-.Rmd
+    Deleted:    output/Report_B_cells.html
+    Deleted:    output/Report_Dendritic_cells.html
+    Deleted:    output/Report_Ly6C_neg_monocytes.html
+    Deleted:    output/Report_Ly6C_pos_monocytes.html
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/application_Neutrophils.Rmd</code>) and HTML (<code>docs/application_Neutrophils.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/531070c4b7f320846487516d55bca0c56a654fc7/analysis/application_Neutrophils.Rmd" target="_blank">531070c</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-22
+</td>
+<td>
+upload presentation results
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div id="summary" class="section level2">
+<h2>Summary</h2>
+<p>We apply poisson mash ruv to a subset of neutrophils from a single cell cytokines dataset, where the conditions represent different types of cytokine treatments (<span class="math inline">\(R=46\)</span>). This dataset includes expression data of <span class="math inline">\(J=7,988\)</span> genes from <span class="math inline">\(9,289\)</span> cells. Genes with fewer than <span class="math inline">\(25\)</span> counts summed over all cells are removed.</p>
+<pre class="r"><code>library(pheatmap)
+library(gridExtra)
+
+cols.trt &lt;- readRDS(&quot;../applications_sc/B_cells/condition_colors.Rds&quot;)
+trts &lt;- names(cols.trt)
+
+# swap the color code of IL1b and IL3 for clearer display of data-driven prior covariances
+cols.trt2 &lt;- cols.trt
+cols.trt2[which(trts==&quot;IL1b&quot;)] &lt;- cols.trt[which(trts==&quot;IL3&quot;)]
+cols.trt2[which(trts==&quot;IL3&quot;)] &lt;- cols.trt[which(trts==&quot;IL1b&quot;)]
+cols.trt &lt;- cols.trt2</code></pre>
+</div>
+<div id="running-ed-step" class="section level2">
+<h2>Running ED step</h2>
+<p>To estimate the data-driven prior covariances in the mash prior, we fit poisson mash ruv to a subset of genes that are identified to be differentially expressed across conditions by a conditional multinomial goodness-of-fit test. In the current implementation, the <span class="math inline">\(R\)</span> canonical prior covariances modeling the condition-specific effects are also included in this step with their scaling parameters to be estimated. We expect that in the presence of these canonical prior covariances, we can better estimate the data-driven prior covariances which capture the effect-sharing patterns across conditions that exist in the data.</p>
+<pre class="r"><code>## load in the ED results
+fit.ed &lt;- readRDS(&quot;../applications_sc/Neutrophils/pois_mash_ruv_ed.Rds&quot;)
+
+## running time per iteration in ED
+fit.ed$runtime/length(fit.ed$ELBO)</code></pre>
+<pre><code>      user     system    elapsed 
+215.209136   1.988778 217.287028 </code></pre>
+<pre class="r"><code>## look at the ELBO
+plot(fit.ed$ELBO, xlab = &quot;niter&quot;, ylab = &quot;elbo&quot;, main=&quot;fitting ED step&quot;)</code></pre>
+<p><img src="figure/application_Neutrophils.Rmd/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="running-poisson-mash-ruv" class="section level2">
+<h2>Running poisson mash ruv</h2>
+<p>We then fit poisson mash ruv to the entire dataset.</p>
+<pre class="r"><code>## load in the poisson mash ruv fit
+res &lt;- readRDS(&quot;../applications_sc/Neutrophils/pois_mash_ruv_fit.Rds&quot;)
+
+## running time
+res$runtime</code></pre>
+<pre><code>     user    system   elapsed 
+95906.137   670.395 96623.238 </code></pre>
+<pre class="r"><code>## look at ELBO
+plot(res$ELBO, xlab = &quot;niter&quot;, ylab = &quot;elbo&quot;, main=&quot;Fitting poisson mash ruv&quot;)</code></pre>
+<p><img src="figure/application_Neutrophils.Rmd/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>## calculate prior weights
+pi.mat &lt;- matrix(res$pi, ncol=length(res$wlist), byrow=TRUE)
+
+rownames(pi.mat) &lt;- c(names(res$Ulist), names(res$ulist))
+colnames(pi.mat) &lt;- paste0(&quot;w=&quot;, round(res$wlist, 3))
+pheatmap(pi.mat, cluster_rows=FALSE, cluster_cols=FALSE, fontsize_row = 6, fontsize_col=6, 
+         main=&quot;Estimated weights of prior covariances in poisson mash ruv&quot;)</code></pre>
+<p><img src="figure/application_Neutrophils.Rmd/unnamed-chunk-3-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>rowSums(pi.mat, 3)</code></pre>
+<pre><code>        tPCA      Emp_cov         PC_1         PC_2         PC_3         PC_4 
+0.6770357129 0.0039466729 0.1798724985 0.0010692341 0.0114198727 0.0475918216 
+        PC_5          e_1          e_2          e_3          e_4          e_5 
+0.0335872562 0.0004904892 0.0008578246 0.0005086381 0.0005005185 0.0004807545 
+         e_6          e_7          e_8          e_9         e_10         e_11 
+0.0004408770 0.0005817873 0.0005428432 0.0004675431 0.0004935665 0.0004180851 
+        e_12         e_13         e_14         e_15         e_16         e_17 
+0.0004540023 0.0004683150 0.0003999752 0.0005620996 0.0006399559 0.0005558285 
+        e_18         e_19         e_20         e_21         e_22         e_23 
+0.0004458573 0.0103724623 0.0004069479 0.0006929622 0.0004079443 0.0005117903 
+        e_24         e_25         e_26         e_27         e_28         e_29 
+0.0004616960 0.0008357029 0.0009589993 0.0005001543 0.0005115405 0.0004855015 
+        e_30         e_31         e_32         e_33         e_34         e_35 
+0.0004572085 0.0004023152 0.0003924498 0.0004866699 0.0029980600 0.0005839449 
+        e_36         e_37         e_38         e_39         e_40         e_41 
+0.0005243124 0.0004402148 0.0005245070 0.0005508582 0.0004450623 0.0004676830 
+        e_42         e_43         e_44         e_45         e_46          e_0 
+0.0084774597 0.0005469100 0.0003803264 0.0005510142 0.0007484768 0.0012193306 </code></pre>
+</div>
+<div id="estimate-of-data-driven-covariances-from-ed-step" class="section level2">
+<h2>Estimate of data-driven covariances from ED step</h2>
+<pre class="r"><code>### Estimate of top eigenvectors of the data-driven covariance initialized by rank-5 PCA
+eig.tPCA &lt;- eigen(fit.ed$Ulist[[1]])
+pve.tPCA &lt;- eig.tPCA$values/sum(eig.tPCA$values)
+
+for (k in 1:1){
+  v &lt;- eig.tPCA$vectors[,k]
+  v &lt;- v/v[which.max(abs(v))]
+  
+  ed.plot &lt;- barplot(v, col = cols.trt, xlab = &quot;&quot;, ylim = range(v+0.5*sign(v)),
+                     main = paste0(names(fit.ed$Ulist)[1], &quot;: weight &quot;, round(rowSums(pi.mat)[1],3), 
+                                   &quot;:\nEigenvector &quot;, k, &quot; (pve = &quot;, round(pve.tPCA[k],3), &quot;)&quot;))
+  text(x = ed.plot, y = v + ifelse(v &gt;= 0, 0.1, -0.25),  label = names(cols.trt), pos = 3, cex = 0.75, col = &quot;black&quot;, srt=90)
+}</code></pre>
+<p><img src="figure/application_Neutrophils.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>### Estimate of top eigenvectors of rank-1 data-driven covariance matrices
+for (k in 1:length(fit.ed$ulist)){
+  if(rowSums(pi.mat)[k+2] &gt; 1e-1 &amp; sum(fit.ed$ulist[[k]]!=0)&gt;0){
+    v &lt;- as.numeric(fit.ed$ulist[[k]])
+    v &lt;- v/v[which.max(abs(v))]
+    
+    ed.plot &lt;- barplot(v, col = cols.trt, xlab = &quot;&quot;, ylim = range(v+0.5*sign(v)), 
+                       main = paste0(names(fit.ed$ulist)[k], &quot;: weight &quot;, round(rowSums(pi.mat)[k+2],3))) 
+    text(x = ed.plot, y = v + ifelse(v &gt;= 0, 0.1, -0.25),  label = names(cols.trt), pos = 3, cex = 0.75, col = &quot;black&quot;, srt=90)
+  }
+}</code></pre>
+<p><img src="figure/application_Neutrophils.Rmd/unnamed-chunk-4-2.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="the-list-of-de-genes" class="section level2">
+<h2>The list of DE genes</h2>
+<p>We perform a gene set over-representation analysis of the differentially expressed genes identified by poisson mash ruv at lfsr = 0.01, against all genes in the single cytokines dataset representing the background. These analyses are performed online using <a href="http://www.webgestalt.org">WebGestalt</a>, which can provide non-redundant significantly enriched gene ontology terms. The results can be found <a href="../output/Report_Neutrophils.html">here</a>.</p>
+<pre class="r"><code>### load in the poisson mash ruv posterior summary
+pois.ruv &lt;- readRDS(&quot;../applications_sc/Neutrophils/pois_mash_ruv_posterior.Rds&quot;)
+
+### number of DE genes
+idx.pois &lt;- which(apply(pois.ruv$lfsr, 1, min) &lt; 0.01)
+length(idx.pois)</code></pre>
+<pre><code>[1] 1075</code></pre>
+</div>
+<div id="a-few-examples-in-go0002532-production-of-molecular-mediator-involved-in-inflammatory-response" class="section level2">
+<h2>A few examples (in <a href="GO:0002532" class="uri">GO:0002532</a>: production of molecular mediator involved in inflammatory response)</h2>
+<pre class="r"><code>### load in the plotting function
+source(&quot;./code/plot_by_gene.R&quot;)
+
+### load in the condition-level count data
+data &lt;- readRDS(&quot;../applications_sc/Neutrophils/data_jr.Rds&quot;)
+data.jr &lt;- data$data.jr
+s &lt;- data$s
+
+plot_by_gene(data=data.jr, s=s, res.pois=pois.ruv, genename=&quot;Alox5ap&quot;, cols.trt=cols.trt)</code></pre>
+<p><img src="figure/application_Neutrophils.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_Neutrophils.Rmd/unnamed-chunk-6-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plot_by_gene(data=data.jr, s=s, res.pois=pois.ruv, genename=&quot;Cd300a&quot;, cols.trt=cols.trt)</code></pre>
+<p><img src="figure/application_Neutrophils.Rmd/unnamed-chunk-6-3.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_Neutrophils.Rmd/unnamed-chunk-6-4.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plot_by_gene(data=data.jr, s=s, res.pois=pois.ruv, genename=&quot;Fcer1g&quot;, cols.trt=cols.trt)</code></pre>
+<p><img src="figure/application_Neutrophils.Rmd/unnamed-chunk-6-5.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_Neutrophils.Rmd/unnamed-chunk-6-6.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plot_by_gene(data=data.jr, s=s, res.pois=pois.ruv, genename=&quot;Gpsm3&quot;, cols.trt=cols.trt)</code></pre>
+<p><img src="figure/application_Neutrophils.Rmd/unnamed-chunk-6-7.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_Neutrophils.Rmd/unnamed-chunk-6-8.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plot_by_gene(data=data.jr, s=s, res.pois=pois.ruv, genename=&quot;Il4ra&quot;, cols.trt=cols.trt)</code></pre>
+<p><img src="figure/application_Neutrophils.Rmd/unnamed-chunk-6-9.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_Neutrophils.Rmd/unnamed-chunk-6-10.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plot_by_gene(data=data.jr, s=s, res.pois=pois.ruv, genename=&quot;Mapk14&quot;, cols.trt=cols.trt)</code></pre>
+<p><img src="figure/application_Neutrophils.Rmd/unnamed-chunk-6-11.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_Neutrophils.Rmd/unnamed-chunk-6-12.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plot_by_gene(data=data.jr, s=s, res.pois=pois.ruv, genename=&quot;Myd88&quot;, cols.trt=cols.trt)</code></pre>
+<p><img src="figure/application_Neutrophils.Rmd/unnamed-chunk-6-13.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_Neutrophils.Rmd/unnamed-chunk-6-14.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plot_by_gene(data=data.jr, s=s, res.pois=pois.ruv, genename=&quot;Snap23&quot;, cols.trt=cols.trt)</code></pre>
+<p><img src="figure/application_Neutrophils.Rmd/unnamed-chunk-6-15.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_Neutrophils.Rmd/unnamed-chunk-6-16.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plot_by_gene(data=data.jr, s=s, res.pois=pois.ruv, genename=&quot;Tarm1&quot;, cols.trt=cols.trt)</code></pre>
+<p><img src="figure/application_Neutrophils.Rmd/unnamed-chunk-6-17.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_Neutrophils.Rmd/unnamed-chunk-6-18.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plot_by_gene(data=data.jr, s=s, res.pois=pois.ruv, genename=&quot;Tlr4&quot;, cols.trt=cols.trt)</code></pre>
+<p><img src="figure/application_Neutrophils.Rmd/unnamed-chunk-6-19.png" width="672" style="display: block; margin: auto;" /><img src="figure/application_Neutrophils.Rmd/unnamed-chunk-6-20.png" width="672" style="display: block; margin: auto;" /></p>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 3.6.2 (2019-12-12)
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+Running under: macOS  10.16
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRblas.0.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRlapack.dylib
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] rmeta_3.0       gridExtra_2.3   pheatmap_1.0.12 workflowr_1.6.2
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_1.0.6         knitr_1.30         whisker_0.4        magrittr_2.0.1    
+ [5] munsell_0.5.0      colorspace_2.0-0   R6_2.5.0           rlang_0.4.10      
+ [9] stringr_1.4.0      tools_3.6.2        grid_3.6.2         gtable_0.3.0      
+[13] xfun_0.17          git2r_0.27.1       htmltools_0.4.0    yaml_2.2.1        
+[17] digest_0.6.27      rprojroot_2.0.2    lifecycle_0.2.0    RColorBrewer_1.1-2
+[21] later_1.0.0        promises_1.1.0     fs_1.4.1           glue_1.4.2        
+[25] evaluate_0.14      rmarkdown_2.3      stringi_1.4.6      compiler_3.6.2    
+[29] scales_1.1.1       httpuv_1.5.2      </code></pre>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

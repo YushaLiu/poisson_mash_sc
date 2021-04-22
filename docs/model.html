@@ -9,9 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Yusha Liu" />
 
 
-<title>Home</title>
+<title>Description of poisson mash ruv model</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,6 +20,9 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -258,6 +262,69 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -265,6 +332,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -308,7 +385,9 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Home</h1>
+<h1 class="title toc-ignore">Description of poisson mash ruv model</h1>
+<h4 class="author">Yusha Liu</h4>
+<h4 class="date">2021-4-22</h4>
 
 </div>
 
@@ -408,7 +487,7 @@ Note that any generated files, e.g. HTML, png, CSS, etc., are not included in t
 <div id="versions" class="tab-pane fade">
 
 <p>
-These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/index.Rmd</code>) and HTML (<code>docs/index.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/model.Rmd</code>) and HTML (<code>docs/model.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
 </p>
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
@@ -437,7 +516,7 @@ Message
 Rmd
 </td>
 <td>
-<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/531070c4b7f320846487516d55bca0c56a654fc7/analysis/index.Rmd" target="_blank">531070c</a>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/531070c4b7f320846487516d55bca0c56a654fc7/analysis/model.Rmd" target="_blank">531070c</a>
 </td>
 <td>
 yushaliu
@@ -449,142 +528,6 @@ yushaliu
 upload presentation results
 </td>
 </tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/YushaLiu/poisson_mash_sc/2a497f2b64ce6af5fb27355d3f30e16c851db8bc/docs/index.html" target="_blank">2a497f2</a>
-</td>
-<td>
-yushaliu
-</td>
-<td>
-2021-04-14
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/36caa0ed3cb811d7fc653a8c70a390e20aae45ac/analysis/index.Rmd" target="_blank">36caa0e</a>
-</td>
-<td>
-yushaliu
-</td>
-<td>
-2021-04-14
-</td>
-<td>
-update poisson mash ruv results
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/YushaLiu/poisson_mash_sc/0d2685afcb1bc1ed7c8e06d68aafc4f1431b1cfd/docs/index.html" target="_blank">0d2685a</a>
-</td>
-<td>
-yushaliu
-</td>
-<td>
-2021-03-31
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/4aeba12847ab86394d2c559c8c5ccbfbd3f8e9e5/analysis/index.Rmd" target="_blank">4aeba12</a>
-</td>
-<td>
-yushaliu
-</td>
-<td>
-2021-03-31
-</td>
-<td>
-Add more applications
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/YushaLiu/poisson_mash_sc/773b5b62cdacf0f9f10483527797bbc71a3c541c/docs/index.html" target="_blank">773b5b6</a>
-</td>
-<td>
-yushaliu
-</td>
-<td>
-2021-03-31
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/29e00976f397df86396aa0f7c15f993eceef182d/analysis/index.Rmd" target="_blank">29e0097</a>
-</td>
-<td>
-yushaliu
-</td>
-<td>
-2021-03-31
-</td>
-<td>
-Update results for poisson mash ruv on scdata
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/YushaLiu/poisson_mash_sc/961b3d1d8074401c45c3b5f90d6a3db229802bf5/docs/index.html" target="_blank">961b3d1</a>
-</td>
-<td>
-yushaliu
-</td>
-<td>
-2021-03-30
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/8cf92cd2d0f73e9188d99c8ad05429e56822f70e/analysis/index.Rmd" target="_blank">8cf92cd</a>
-</td>
-<td>
-yushaliu
-</td>
-<td>
-2021-03-30
-</td>
-<td>
-Start workflowr project.
-</td>
-</tr>
 </tbody>
 </table>
 </div>
@@ -592,18 +535,29 @@ Start workflowr project.
 </div>
 </div>
 </div>
-<p>Welcome to my research website.</p>
-<div id="application-and-simulation-based-on-cytokines-dataset" class="section level2">
-<h2>Application and simulation based on cytokines dataset</h2>
-<p>Click on this <a href="simulations.html">link</a> to see application of poisson mash and competing methods on simulated data. <br/> Click on this <a href="application_B_cells.html">link</a> to see application of poisson mash ruv to a subset of B cells from the single cytokines dataset. <br/> Click on this <a href="application_Ly6C_pos.html">link</a> to see application of poisson mash ruv to a subset of Ly6C+ monocytes from the single cytokines dataset. <br/> Click on this <a href="application_Ly6C_neg.html">link</a> to see application of poisson mash ruv to a subset of Ly6C- monocytes from the single cytokines dataset. <br/> Click on this <a href="application_Dendritic.html">link</a> to see application of poisson mash ruv to a subset of dendritic cells from the single cytokines dataset. <br/></p>
+<div id="model-setup" class="section level2">
+<h2>Model setup</h2>
+<p>Suppose there are <span class="math inline">\(j=1, \dots, J\)</span> genes and <span class="math inline">\(i=1, \dots, N\)</span> cells. The observed single cell count matrix <span class="math inline">\(Y\)</span> is <span class="math inline">\(N \times J\)</span>, with its <span class="math inline">\((i, j)\)</span> element <span class="math inline">\(Y_{ij}\)</span> denoting the count of gene <span class="math inline">\(j\)</span> in cell <span class="math inline">\(i\)</span>.</p>
+<p>We assume that the <span class="math inline">\(N\)</span> cells come from <span class="math inline">\(r=1, \dots, R\)</span> conditions, with <span class="math inline">\(n_r\)</span> cells (indexed by <span class="math inline">\(\mathcal{S}_r \subset \{1, \dots, N\}\)</span>) coming from condition <span class="math inline">\(r\)</span>. To compare expression levels across multiple conditions, we collapse the single cell count matrix <span class="math inline">\(Y\)</span> into a condition level count matrix <span class="math inline">\(X\)</span>, which is a <span class="math inline">\(J \times R\)</span> matrix with its <span class="math inline">\((j, r)\)</span> element <span class="math inline">\(X_{jr} = \sum_{i \in \mathcal{S}_r} Y_{ij}\)</span>.</p>
+<p>Let <span class="math inline">\(s_i\)</span> denote the size factor of cell <span class="math inline">\(i\)</span>, which can be calculated by taking the sum (or equivalently, mean) of counts over all genes in cell <span class="math inline">\(i\)</span>, or using other <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-0947-7">more robust methods</a>. Let <span class="math inline">\(s_r = \sum_{i \in \mathcal{S}_r} s_i\)</span> denote the size factor of condition <span class="math inline">\(r\)</span>.</p>
 </div>
-<div id="updated-application-results" class="section level2">
-<h2>Updated application results</h2>
-<p>Click on this <a href="application_B_cells_v2.html">link</a> to see application of poisson mash ruv to a subset of B cells from the single cytokines dataset. <br/> Click on this <a href="application_Ly6C_pos_v2.html">link</a> to see application of poisson mash ruv to a subset of Ly6C+ monocytes from the single cytokines dataset. <br/> Click on this <a href="application_Ly6C_neg_v2.html">link</a> to see application of poisson mash ruv to a subset of Ly6C- monocytes from the single cytokines dataset. <br/> Click on this <a href="application_Dendritic_v2.html">link</a> to see application of poisson mash ruv to a subset of dendritic cells from the single cytokines dataset. <br/></p>
-</div>
-<div id="presentation-on-application-to-cytokines-dataset" class="section level2">
-<h2>Presentation on application to cytokines dataset</h2>
-<p>Click on this <a href="model.html">link</a> to see a brief description of the poisson mash ruv method. <br/> Click on this <a href="application_B_cells_v3.html">link</a> to see application of poisson mash ruv to a subset of B cells. <br/> Click on this <a href="application_Ly6C_pos_v3.html">link</a> to see application of poisson mash ruv to a subset of Ly6C+ monocytes. <br/> Click on this <a href="application_Ly6C_neg_v3.html">link</a> to see application of poisson mash ruv to a subset of Ly6C- monocytes. <br/> Click on this <a href="application_Dendritic_v3.html">link</a> to see application of poisson mash ruv to a subset of dendritic cells. <br/> Click on this <a href="application_CD4_T_cells.html">link</a> to see application of poisson mash ruv to a subset of CD4 T cells. <br/> Click on this <a href="application_CD8_T_cells.html">link</a> to see application of poisson mash ruv to a subset of CD8 T cells. <br/> Click on this <a href="application_Neutrophils.html">link</a> to see application of poisson mash ruv to a subset of neutrophils. <br/> Click on this <a href="application_NK_cells.html">link</a> to see application of poisson mash ruv to a subset of NK cells. <br/></p>
+<div id="poisson-mash-ruv-removing-unwanted-variation" class="section level2">
+<h2>Poisson mash ruv (removing unwanted variation)</h2>
+<p>In poisson mash ruv, we assume the following hierarchical model on aggregated condition-level count matrix <span class="math inline">\(X\)</span>: <span class="math display">\[\begin{align}
+(1). \quad\quad\quad &amp; X_{jr} \sim \; Pois (s_r \lambda_{jr}), \\
+(2). \quad\quad\quad &amp; \log \left(\lambda_{jr} \right) = \; \mu_j + \beta_{jr} + \eta_{jr} + \sum_{d=1}^D \rho_{rd} f_{jd}, \\
+(3). \quad\quad\quad &amp; \beta_j \sim \; \sum_{k,l} \pi_{kl} N(0, w_l U_k)  \quad \text{where} \;\; \sum_{k,l} \pi_{kl} = 1,  \\
+(4). \quad\quad\quad &amp; \eta_j \sim \; N(0, \psi_j^2 I_R). \\
+\end{align}\]</span></p>
+<p>In Eq(1), <span class="math inline">\(\lambda_{jr}\)</span> is a gene-specific, condition-specific intensity parameter, <span class="math inline">\(s_r\)</span> is condition-specific and accounts for different sequencing depths across conditions.</p>
+<p>In Eq(2), we decompose <span class="math inline">\(\log(\lambda_{jr})\)</span> for gene <span class="math inline">\(j\)</span> and condition <span class="math inline">\(r\)</span> into 4 parts: (i) <span class="math inline">\(\mu_j\)</span> which models the gene-specific underlying mean shared by all conditions, (ii) <span class="math inline">\(\beta_{jr}\)</span> which models the gene-specific, condition-specific effect, (iii) <span class="math inline">\(\eta_{jr}\)</span> which models the individual sample effect, and (iv) <span class="math inline">\(\sum_{d} \rho_{rd} f_{jd}\)</span> which represents the bias caused by unwanted variation.</p>
+<p>In Eq(3), we assign <span class="math inline">\(\beta_{jr}\)</span> the mash prior (a mixture of MVNs) that can achieve adaptive shrinkage and allow arbitrary patterns of correlations among conditions. <span class="math inline">\(U_k (k=1, \dots, K)\)</span> include canonical prior covariances <span class="math inline">\(e_r e_r&#39;\)</span> that model condition-specific effects, and data-driven prior covariances that model effect-sharing patterns among conditions, and <span class="math inline">\(w_l (l=1, \dots, L)\)</span> are scaling parameters that model varying sizes of effects. In fitting poisson mash ruv, we are mainly interested in estimation and inference on <span class="math inline">\(\beta_{jr}\)</span>.</p>
+<p>In Eq(4), we assign the individual sample effect term <span class="math inline">\(\eta_{jr}\)</span> a MVN prior with zero mean and gene-specific covariance <span class="math inline">\(\psi_j^2 I_R\)</span>, which can account for over-dispersion of count data. To see this, we can integrate out the term <span class="math inline">\(\eta_{jr}\)</span> and get <span class="math display">\[\begin{align}
+\mathbb{E} \left[X_{jr} \right] =  s_r \exp \left(\mu_j + \beta_{jr} + \sum_{d=1}^D \rho_{rd} f_{jd} + \frac{1}{2} \psi_j^2 \right), 
+\end{align}\]</span> <span class="math display">\[\begin{align}
+\text{Var} \left(X_{jr} \right) = s_r \exp \left(\mu_j + \beta_{jr} + \sum_{d=1}^D \rho_{rd} f_{jd} + \frac{1}{2} \psi_j^2 \right) + s_r^2 \left(\exp(\psi_j^2) - 1 \right) \exp \left(2 \mu_j + 2 \beta_{jr} + 2 \sum_{d=1}^D \rho_{rd} f_{jd} + \psi_j^2 \right), 
+\end{align}\]</span></p>
+<p>which shows that <span class="math inline">\(\text{Var} \left(X_{jr} \right)\)</span> is larger than <span class="math inline">\(\mathbb{E} \left[X_{jr} \right]\)</span> when <span class="math inline">\(\psi_j &gt; 0\)</span>.</p>
 </div>
 
 
@@ -620,6 +574,8 @@ footer is added to webpages before the MathJax javascript. -->
 </script>
 
 
+</div>
+</div>
 
 </div>
 
@@ -652,6 +608,32 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
