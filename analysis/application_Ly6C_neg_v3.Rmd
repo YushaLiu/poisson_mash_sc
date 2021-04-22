@@ -1,0 +1,140 @@
+---
+title: "Application of poisson mash ruv to Ly6C- monocytes in single cell cytokines data"
+author: "Yusha Liu"
+header-includes:
+date: "2021-4-21"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+## Summary
+We apply poisson mash ruv to a subset of Ly6C- monocytes from a single cell cytokines dataset, where the conditions represent different types of cytokine treatments ($R=46$). This dataset includes expression data of $J=10,286$ genes from $3,855$ cells. Genes with fewer than $25$ counts summed over all cells are removed. 
+```{r warning=FALSE, message=FALSE}
+library(pheatmap)
+library(gridExtra)
+
+cols.trt <- readRDS("../applications_sc/B_cells/condition_colors.Rds")
+trts <- names(cols.trt)
+
+```
+
+
+
+## Running ED step
+To estimate the data-driven prior covariances in the mash prior, we fit poisson mash ruv to a subset of genes that are identified to be differentially expressed across conditions by a conditional multinomial goodness-of-fit test. In the current implementation, the $R$ canonical prior covariances modeling the condition-specific effects are also included in this step with their scaling parameters to be estimated. We expect that in the presence of these canonical prior covariances, we can better estimate the data-driven prior covariances which capture the effect-sharing patterns across conditions that exist in the data.
+```{r warning=FALSE, message=FALSE}
+## load in the ED results
+fit.ed <- readRDS("../applications_sc/Ly6C-/pois_mash_ruv_ed_v3.Rds")
+
+## running time per iteration in ED
+fit.ed$runtime/length(fit.ed$ELBO)
+                      
+## look at the ELBO
+plot(fit.ed$ELBO, xlab = "niter", ylab = "elbo", main="fitting ED step")
+
+```
+
+
+
+## Running poisson mash ruv
+We then fit poisson mash ruv to the entire dataset.
+```{r warning=FALSE, message=FALSE}
+## load in the poisson mash ruv fit
+res <- readRDS("../applications_sc/Ly6C-/pois_mash_ruv_fit_v5.Rds")
+
+## running time
+res$runtime
+
+## look at ELBO
+plot(res$ELBO, xlab = "niter", ylab = "elbo", main="Fitting poisson mash ruv")
+
+## calculate prior weights
+pi.mat <- matrix(res$pi, ncol=length(res$wlist), byrow=TRUE)
+
+rownames(pi.mat) <- c(names(res$Ulist), names(res$ulist))
+colnames(pi.mat) <- paste0("w=", round(res$wlist, 3))
+pheatmap(pi.mat, cluster_rows=FALSE, cluster_cols=FALSE, fontsize_row = 6, fontsize_col=6, 
+         main="Estimated weights of prior covariances in poisson mash ruv")
+
+rowSums(pi.mat, 3)
+
+```
+
+
+
+## Estimate of data-driven covariances from ED step
+```{r warning=FALSE, message=FALSE}
+### Estimate of top eigenvectors of the data-driven covariance initialized by rank-5 PCA
+eig.tPCA <- eigen(fit.ed$Ulist[[1]])
+pve.tPCA <- eig.tPCA$values/sum(eig.tPCA$values)
+
+for (k in 1:2){
+  v <- eig.tPCA$vectors[,k]
+  v <- v/v[which.max(abs(v))]
+  
+  ed.plot <- barplot(v, col = cols.trt, xlab = "", ylim = range(v+0.5*sign(v)),
+                     main = paste0(names(fit.ed$Ulist)[1], ": weight ", round(rowSums(pi.mat)[1],3), 
+                                   ":\nEigenvector ", k, " (pve = ", round(pve.tPCA[k],3), ")"))
+  text(x = ed.plot, y = v + ifelse(v >= 0, 0.1, -0.25),  label = names(cols.trt), pos = 3, cex = 0.75, col = "black", srt=90)
+}
+
+
+### Estimate of top eigenvectors of rank-1 data-driven covariance matrices
+for (k in 1:length(fit.ed$ulist)){
+  if(rowSums(pi.mat)[k+2] > 1e-1 & sum(fit.ed$ulist[[k]]!=0)>0){
+    v <- as.numeric(fit.ed$ulist[[k]])
+    v <- v/v[which.max(abs(v))]
+    
+    ed.plot <- barplot(v, col = cols.trt, xlab = "", ylim = range(v+0.5*sign(v)), 
+                       main = paste0(names(fit.ed$ulist)[k], ": weight ", round(rowSums(pi.mat)[k+2],3))) 
+    text(x = ed.plot, y = v + ifelse(v >= 0, 0.1, -0.25),  label = names(cols.trt), pos = 3, cex = 0.75, col = "black", srt=90)
+  }
+}
+
+```
+
+
+
+## The list of DE genes
+We perform a gene set over-representation analysis of the differentially expressed genes identified by poisson mash ruv at lfsr = 0.05, against all genes in the single cytokines dataset representing the background. These analyses are performed online using [WebGestalt](http://www.webgestalt.org), which can provide non-redundant significantly enriched gene ontology terms. The results can be found [here](../output/Report_Ly6C_neg_monocytes.html).
+```{r warning=FALSE, message=FALSE}
+### load in the poisson mash ruv posterior summary
+pois.ruv <- readRDS("../applications_sc/Ly6C-/pois_mash_ruv_posterior_v5.Rds")
+
+### number of DE genes
+idx.pois <- which(apply(pois.ruv$lfsr, 1, min) < 0.05)
+length(idx.pois)
+
+```
+
+
+
+## A few examples (in GO:0035456: response to interferon-beta)
+```{r warning=FALSE, message=FALSE}
+### load in the plotting function
+source("./code/plot_by_gene.R")
+
+### load in the condition-level count data
+data <- readRDS("../applications_sc/Ly6C-/data_jr.Rds")
+data.jr <- data$data.jr
+s <- data$s
+
+plot_by_gene(data=data.jr, s=s, res.pois=pois.ruv, genename="Bst2", cols.trt=cols.trt)
+plot_by_gene(data=data.jr, s=s, res.pois=pois.ruv, genename="Gbp2", cols.trt=cols.trt)
+plot_by_gene(data=data.jr, s=s, res.pois=pois.ruv, genename="Gbp3", cols.trt=cols.trt)
+plot_by_gene(data=data.jr, s=s, res.pois=pois.ruv, genename="Ifi203", cols.trt=cols.trt)
+plot_by_gene(data=data.jr, s=s, res.pois=pois.ruv, genename="Ifi205", cols.trt=cols.trt)
+plot_by_gene(data=data.jr, s=s, res.pois=pois.ruv, genename="Ifi47", cols.trt=cols.trt)
+plot_by_gene(data=data.jr, s=s, res.pois=pois.ruv, genename="Ifit1", cols.trt=cols.trt)
+plot_by_gene(data=data.jr, s=s, res.pois=pois.ruv, genename="Ifit1bl1", cols.trt=cols.trt)
+plot_by_gene(data=data.jr, s=s, res.pois=pois.ruv, genename="Ifit3", cols.trt=cols.trt)
+plot_by_gene(data=data.jr, s=s, res.pois=pois.ruv, genename="Ifit3b", cols.trt=cols.trt)
+plot_by_gene(data=data.jr, s=s, res.pois=pois.ruv, genename="Igtp", cols.trt=cols.trt)
+plot_by_gene(data=data.jr, s=s, res.pois=pois.ruv, genename="Irf1", cols.trt=cols.trt)
+plot_by_gene(data=data.jr, s=s, res.pois=pois.ruv, genename="Irgm1", cols.trt=cols.trt)
+plot_by_gene(data=data.jr, s=s, res.pois=pois.ruv, genename="Mndal", cols.trt=cols.trt)
+plot_by_gene(data=data.jr, s=s, res.pois=pois.ruv, genename="Tgtp2", cols.trt=cols.trt)
+plot_by_gene(data=data.jr, s=s, res.pois=pois.ruv, genename="Xaf1", cols.trt=cols.trt)
+
+```

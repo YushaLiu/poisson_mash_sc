@@ -1,0 +1,49 @@
+---
+title: "Description of poisson mash ruv model"
+author: "Yusha Liu"
+header-includes:
+date: "2021-4-22"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+
+## Model setup
+Suppose there are $j=1, \dots, J$ genes and $i=1, \dots, N$ cells. The observed single cell count matrix $Y$ is $N \times J$, with its $(i, j)$ element $Y_{ij}$ denoting the count of gene $j$ in cell $i$.  
+
+We assume that the $N$ cells come from $r=1, \dots, R$ conditions, with $n_r$ cells (indexed by $\mathcal{S}_r \subset \{1, \dots, N\}$) coming from condition $r$. To compare expression levels across multiple conditions, we collapse the single cell count matrix $Y$ into a condition level count matrix $X$, which is a $J \times R$ matrix with its $(j, r)$ element $X_{jr} = \sum_{i \in \mathcal{S}_r} Y_{ij}$.  
+
+Let $s_i$ denote the size factor of cell $i$, which can be calculated by taking the sum (or equivalently, mean) of counts over all genes in cell $i$, or using other [more robust methods](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-0947-7).  Let $s_r = \sum_{i \in \mathcal{S}_r} s_i$ denote the size factor of condition $r$. 
+
+
+
+## Poisson mash ruv (removing unwanted variation)
+In poisson mash ruv, we assume the following hierarchical model on aggregated condition-level count matrix $X$:
+\begin{align}
+(1). \quad\quad\quad & X_{jr} \sim \; Pois (s_r \lambda_{jr}), \\
+(2). \quad\quad\quad & \log \left(\lambda_{jr} \right) = \; \mu_j + \beta_{jr} + \eta_{jr} + \sum_{d=1}^D \rho_{rd} f_{jd}, \\
+(3). \quad\quad\quad & \beta_j \sim \; \sum_{k,l} \pi_{kl} N(0, w_l U_k)  \quad \text{where} \;\; \sum_{k,l} \pi_{kl} = 1,  \\
+(4). \quad\quad\quad & \eta_j \sim \; N(0, \psi_j^2 I_R). \\
+\end{align}
+
+In Eq(1), $\lambda_{jr}$ is a gene-specific, condition-specific intensity parameter, $s_r$ is condition-specific and accounts for different sequencing depths across conditions.
+
+In Eq(2), we decompose $\log(\lambda_{jr})$ for gene $j$ and condition $r$ into 4 parts:  (i) $\mu_j$ which models the gene-specific underlying mean shared by all conditions, (ii) $\beta_{jr}$ which models the gene-specific, condition-specific effect, (iii) $\eta_{jr}$ which models the individual sample effect, and (iv) $\sum_{d} \rho_{rd} f_{jd}$ which represents the bias caused by unwanted variation. 
+
+In Eq(3), we assign $\beta_{jr}$ the mash prior (a mixture of MVNs) that can achieve adaptive shrinkage and allow arbitrary patterns of correlations among conditions. $U_k (k=1, \dots, K)$ include canonical prior covariances $e_r e_r'$ that model condition-specific effects, and data-driven prior covariances that model effect-sharing patterns among conditions, and $w_l (l=1, \dots, L)$ are scaling parameters that model varying sizes of effects. In fitting poisson mash ruv, we are mainly interested in estimation and inference on $\beta_{jr}$.
+
+In Eq(4), we assign the individual sample effect term $\eta_{jr}$ a MVN prior with zero mean and gene-specific covariance $\psi_j^2 I_R$, which can account for over-dispersion of count data. To see this, we can integrate out the term $\eta_{jr}$ and get
+\begin{align}
+\mathbb{E} \left[X_{jr} \right] =  s_r \exp \left(\mu_j + \beta_{jr} + \sum_{d=1}^D \rho_{rd} f_{jd} + \frac{1}{2} \psi_j^2 \right), 
+\end{align}
+\begin{align}
+\text{Var} \left(X_{jr} \right) = s_r \exp \left(\mu_j + \beta_{jr} + \sum_{d=1}^D \rho_{rd} f_{jd} + \frac{1}{2} \psi_j^2 \right) + s_r^2 \left(\exp(\psi_j^2) - 1 \right) \exp \left(2 \mu_j + 2 \beta_{jr} + 2 \sum_{d=1}^D \rho_{rd} f_{jd} + \psi_j^2 \right), 
+\end{align}
+
+which shows that $\text{Var} \left(X_{jr} \right)$ is larger than $\mathbb{E} \left[X_{jr} \right]$ when $\psi_j > 0$.
+
+
+
+
+

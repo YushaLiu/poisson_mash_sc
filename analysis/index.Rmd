@@ -24,3 +24,15 @@ Click on this [link](application_B_cells_v2.html) to see application of poisson 
 Click on this [link](application_Ly6C_pos_v2.html) to see application of poisson mash ruv to a subset of Ly6C+ monocytes from the single cytokines dataset. <br/>
 Click on this [link](application_Ly6C_neg_v2.html) to see application of poisson mash ruv to a subset of Ly6C- monocytes from the single cytokines dataset. <br/>
 Click on this [link](application_Dendritic_v2.html) to see application of poisson mash ruv to a subset of dendritic cells from the single cytokines dataset. <br/>
+
+
+## Presentation on application to cytokines dataset
+Click on this [link](model.html) to see a brief description of the poisson mash ruv method. <br/>
+Click on this [link](application_B_cells_v3.html) to see application of poisson mash ruv to a subset of B cells. <br/>
+Click on this [link](application_Ly6C_pos_v3.html) to see application of poisson mash ruv to a subset of Ly6C+ monocytes. <br/>
+Click on this [link](application_Ly6C_neg_v3.html) to see application of poisson mash ruv to a subset of Ly6C- monocytes. <br/>
+Click on this [link](application_Dendritic_v3.html) to see application of poisson mash ruv to a subset of dendritic cells. <br/>
+Click on this [link](application_CD4_T_cells.html) to see application of poisson mash ruv to a subset of CD4 T cells. <br/>
+Click on this [link](application_CD8_T_cells.html) to see application of poisson mash ruv to a subset of CD8 T cells. <br/>
+Click on this [link](application_Neutrophils.html) to see application of poisson mash ruv to a subset of neutrophils. <br/>
+Click on this [link](application_NK_cells.html) to see application of poisson mash ruv to a subset of NK cells. <br/>
