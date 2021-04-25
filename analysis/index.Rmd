@@ -13,6 +13,7 @@ Welcome to my research website.
 
 ## Application and simulation based on cytokines dataset
 Click on this [link](simulations.html) to see application of poisson mash and competing methods on simulated data. <br/>
+Click on this [link](simulations_estimation.html) to see exploration of over-estimation in poisson mash application to simulated single cell data. <br/>
 Click on this [link](application_B_cells.html) to see application of poisson mash ruv to a subset of B cells from the single cytokines dataset. <br/>
 Click on this [link](application_Ly6C_pos.html) to see application of poisson mash ruv to a subset of Ly6C+ monocytes from the single cytokines dataset. <br/>
 Click on this [link](application_Ly6C_neg.html) to see application of poisson mash ruv to a subset of Ly6C- monocytes from the single cytokines dataset. <br/>

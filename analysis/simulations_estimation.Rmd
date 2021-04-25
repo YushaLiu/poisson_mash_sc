@@ -54,10 +54,10 @@ for(iter in 1:20){
 
 
 ### poisson mash without ruv
-round(pois.mash, 3)
+round(pois.mash, 4)
 
 ### poisson mash ruv
-round(pois.mash.ruv, 3)
+round(pois.mash.ruv, 4)
 
 ```
 
@@ -93,10 +93,10 @@ for(iter in 1:20){
 
 
 ### poisson mash without ruv
-round(pois.mash, 3)
+round(pois.mash, 4)
 
 ### poisson mash ruv
-round(pois.mash.ruv, 3)
+round(pois.mash.ruv, 4)
 
 ```
 
