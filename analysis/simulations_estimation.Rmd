@@ -1,0 +1,102 @@
+---
+title: "Exploration of over-estimation in poisson mash application to simulated single cell data"
+author: "Yusha Liu"
+header-includes:
+date: "2021-4-25"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+
+## Simulation scenarios
+To simulate single cell data, we started with a subset of the single cell cytokines data. We first randomly permuted the cells with respect to the condition labels to create null data, then used thinning to add condition effects $\beta_{jr} \sim \sum_k \pi_k MVN(0, U_k)$ to a subset of genes, where the prior covariances $U_k$'s are learned from the poisson mash fit to a subset of B cells in the original dataset, with the effect size (in terms of $\max_r \mid \beta_{jr}\mid$) further scaled to be realistic. We started with the following subsets of the real data, and removed genes with fewer than 25 counts summed over all cells.
+
+\noindent Setting 1: a subset of B cells with 10,691 genes and 15,705 cells from 25 cytokine treatments.
+
+\noindent Setting 2: a smaller subset of B cells with 8,358 genes and 2,096 cells from 25 cytokine treatments.
+
+We simulate 20 single cell datasets for each scenario.
+
+
+
+## Summary of effect size over-estimation
+For poisson mash and poisson mash ruv, we calculate $\frac{E(\beta_{jr}|D)}{\beta_{jr}}$ in the subset of identified unit-condition pairs that are correctly signed, i.e., $\{j,r: \; lfsr_{jr} < 0.05 \; \text{and} \; E(\beta_{jr}|D)\times \beta_{jr} > 0\}$, and report the probability that $\frac{E(\beta_{jr}|D)}{\beta_{jr}} > c_0$ for $c_0 = 1.5, 2, 3, 5, 10$. For each scenario, this analysis is performed on each of the 20 replicate datasets.
+
+### Setting 1
+```{r warning=FALSE, message=FALSE}
+### read in result summary
+ratio.pois.mash <- readRDS("../simulations_sc/setting1/sim_signal_v2_pois_mash_no_ruv_estimation_ratio_summary.Rds")
+ratio.pois.mash.ruv <- readRDS("../simulations_sc/setting1/sim_signal_v2_pois_mash_ruv_estimation_ratio_summary.Rds")
+
+pois.mash <- matrix(NA, nrow=20, ncol=5)
+rownames(pois.mash) <- names(ratio.pois.mash)
+colnames(pois.mash) <- c("prob(>1.5)", "prob(>2)", "prob(>3)", "prob(>5)", "prob(>10)")
+pois.mash.ruv <- matrix(NA, nrow=20, ncol=5)
+rownames(pois.mash.ruv) <- names(ratio.pois.mash.ruv)
+colnames(pois.mash.ruv) <- c("prob(>1.5)", "prob(>2)",  "prob(>3)", "prob(>5)", "prob(>10)")
+
+for(iter in 1:20){
+  ratio <- ratio.pois.mash[[iter]]
+  pois.mash[iter,1] <- mean(ratio > 1.5)
+  pois.mash[iter,2] <- mean(ratio > 2)
+  pois.mash[iter,3] <- mean(ratio > 3)
+  pois.mash[iter,4] <- mean(ratio > 5)
+  pois.mash[iter,5] <- mean(ratio > 10)
+  
+  ratio.ruv <- ratio.pois.mash.ruv[[iter]]
+  pois.mash.ruv[iter,1] <- mean(ratio.ruv > 1.5)
+  pois.mash.ruv[iter,2] <- mean(ratio.ruv > 2)
+  pois.mash.ruv[iter,3] <- mean(ratio.ruv > 3)
+  pois.mash.ruv[iter,4] <- mean(ratio.ruv > 5)
+  pois.mash.ruv[iter,5] <- mean(ratio.ruv > 10)
+}
+
+
+### poisson mash without ruv
+round(pois.mash, 3)
+
+### poisson mash ruv
+round(pois.mash.ruv, 3)
+
+```
+
+
+### Setting 2
+```{r warning=FALSE, message=FALSE}
+### read in result summary
+ratio.pois.mash <- readRDS("../simulations_sc/setting2/sim_signal_v2_pois_mash_no_ruv_estimation_ratio_summary.Rds")
+ratio.pois.mash.ruv <- readRDS("../simulations_sc/setting2/sim_signal_v2_pois_mash_ruv_estimation_ratio_summary.Rds")
+
+pois.mash <- matrix(NA, nrow=20, ncol=5)
+rownames(pois.mash) <- names(ratio.pois.mash)
+colnames(pois.mash) <- c("prob(>1.5)", "prob(>2)", "prob(>3)", "prob(>5)", "prob(>10)")
+pois.mash.ruv <- matrix(NA, nrow=20, ncol=5)
+rownames(pois.mash.ruv) <- names(ratio.pois.mash.ruv)
+colnames(pois.mash.ruv) <- c("prob(>1.5)", "prob(>2)",  "prob(>3)", "prob(>5)", "prob(>10)")
+
+for(iter in 1:20){
+  ratio <- ratio.pois.mash[[iter]]
+  pois.mash[iter,1] <- mean(ratio > 1.5)
+  pois.mash[iter,2] <- mean(ratio > 2)
+  pois.mash[iter,3] <- mean(ratio > 3)
+  pois.mash[iter,4] <- mean(ratio > 5)
+  pois.mash[iter,5] <- mean(ratio > 10)
+  
+  ratio.ruv <- ratio.pois.mash.ruv[[iter]]
+  pois.mash.ruv[iter,1] <- mean(ratio.ruv > 1.5)
+  pois.mash.ruv[iter,2] <- mean(ratio.ruv > 2)
+  pois.mash.ruv[iter,3] <- mean(ratio.ruv > 3)
+  pois.mash.ruv[iter,4] <- mean(ratio.ruv > 5)
+  pois.mash.ruv[iter,5] <- mean(ratio.ruv > 10)
+}
+
+
+### poisson mash without ruv
+round(pois.mash, 3)
+
+### poisson mash ruv
+round(pois.mash.ruv, 3)
+
+```
+
