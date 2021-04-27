@@ -1,0 +1,113 @@
+---
+title: "Examples of poisson mash ruv application to neutrophils in single cell cytokines data"
+author: "Yusha Liu"
+header-includes:
+date: "2021-4-27"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+## Summary
+We apply poisson mash ruv to a subset of neutrophils from a single cell cytokines dataset, where the conditions represent different types of cytokine treatments ($R=46$). This dataset includes expression data of $J=7,988$ genes from $9,289$ cells. Genes with fewer than $25$ counts summed over all cells are removed. 
+```{r warning=FALSE, message=FALSE}
+
+cols.trt <- readRDS("../applications_sc/B_cells/condition_colors.Rds")
+trts <- names(cols.trt)
+
+### swap the color code of IL1b and IL3 for clearer display of IL1b
+cols.trt2 <- cols.trt
+cols.trt2[which(trts=="IL1b")] <- cols.trt[which(trts=="IL3")]
+cols.trt2[which(trts=="IL3")] <- cols.trt[which(trts=="IL1b")]
+cols.trt <- cols.trt2
+
+### load in condition-level count data
+data <- readRDS("../applications_sc/Neutrophils/data_jr.Rds")
+data.jr <- data$data.jr
+s <- data$s
+
+### load in glm fit with poisson link
+res.glm <- readRDS("../applications_sc/Neutrophils/glm_poisson.Rds")
+
+### load in poisson mash ruv fit
+post <- readRDS("../applications_sc/Neutrophils/pois_mash_ruv_posterior.Rds")
+
+### load in the plotting function
+source("../applications_sc/Neutrophils/plot_by_gene_v2.R")
+
+```
+
+
+## A few examples 
+```{r warning=FALSE, message=FALSE}
+res.gene <- readRDS("../applications_sc/Neutrophils/poisson_mash_no_ruv/Alox5ap.Rds")
+
+plot_by_gene(data=data.jr, s=s, res.glm=res.glm, res.pois=list(PosteriorMean=res.gene$PosteriorMean, PosteriorSD=res.gene$PosteriorSD), 
+             res.pois.ruv=post, genename="Alox5ap", cols.trt=cols.trt)   
+
+```
+
+```{r warning=FALSE, message=FALSE}
+res.gene <- readRDS("../applications_sc/Neutrophils/poisson_mash_no_ruv/Gm20400.Rds")
+
+plot_by_gene(data=data.jr, s=s, res.glm=res.glm, res.pois=list(PosteriorMean=res.gene$PosteriorMean, PosteriorSD=res.gene$PosteriorSD), 
+             res.pois.ruv=post, genename="Gm20400", cols.trt=cols.trt)   
+
+```
+
+```{r warning=FALSE, message=FALSE}
+res.gene <- readRDS("../applications_sc/Neutrophils/poisson_mash_no_ruv/Tyrobp.Rds")
+
+plot_by_gene(data=data.jr, s=s, res.glm=res.glm, res.pois=list(PosteriorMean=res.gene$PosteriorMean, PosteriorSD=res.gene$PosteriorSD), 
+             res.pois.ruv=post, genename="Tyrobp", cols.trt=cols.trt)   
+
+```
+
+```{r warning=FALSE, message=FALSE}
+res.gene <- readRDS("../applications_sc/Neutrophils/poisson_mash_no_ruv/Ccl6.Rds")
+
+plot_by_gene(data=data.jr, s=s, res.glm=res.glm, res.pois=list(PosteriorMean=res.gene$PosteriorMean, PosteriorSD=res.gene$PosteriorSD), 
+             res.pois.ruv=post, genename="Ccl6", cols.trt=cols.trt)   
+
+```
+
+```{r warning=FALSE, message=FALSE}
+res.gene <- readRDS("../applications_sc/Neutrophils/poisson_mash_no_ruv/Rsad2.Rds")
+
+plot_by_gene(data=data.jr, s=s, res.glm=res.glm, res.pois=list(PosteriorMean=res.gene$PosteriorMean, PosteriorSD=res.gene$PosteriorSD), 
+             res.pois.ruv=post, genename="Rsad2", cols.trt=cols.trt)   
+
+```
+
+```{r warning=FALSE, message=FALSE}
+res.gene <- readRDS("../applications_sc/Neutrophils/poisson_mash_no_ruv/Fth1.Rds")
+
+plot_by_gene(data=data.jr, s=s, res.glm=res.glm, res.pois=list(PosteriorMean=res.gene$PosteriorMean, PosteriorSD=res.gene$PosteriorSD), 
+             res.pois.ruv=post, genename="Fth1", cols.trt=cols.trt)   
+
+```
+
+```{r warning=FALSE, message=FALSE}
+res.gene <- readRDS("../applications_sc/Neutrophils/poisson_mash_no_ruv/Slpi.Rds")
+
+plot_by_gene(data=data.jr, s=s, res.glm=res.glm, res.pois=list(PosteriorMean=res.gene$PosteriorMean, PosteriorSD=res.gene$PosteriorSD), 
+             res.pois.ruv=post, genename="Slpi", cols.trt=cols.trt)   
+
+```
+
+```{r warning=FALSE, message=FALSE}
+res.gene <- readRDS("../applications_sc/Neutrophils/poisson_mash_no_ruv/Tmsb4x.Rds")
+
+plot_by_gene(data=data.jr, s=s, res.glm=res.glm, res.pois=list(PosteriorMean=res.gene$PosteriorMean, PosteriorSD=res.gene$PosteriorSD), 
+             res.pois.ruv=post, genename="Tmsb4x", cols.trt=cols.trt)   
+
+```
+
+```{r warning=FALSE, message=FALSE}
+res.gene <- readRDS("../applications_sc/Neutrophils/poisson_mash_no_ruv/S100a8.Rds")
+
+plot_by_gene(data=data.jr, s=s, res.glm=res.glm, res.pois=list(PosteriorMean=res.gene$PosteriorMean, PosteriorSD=res.gene$PosteriorSD), 
+             res.pois.ruv=post, genename="S100a8", cols.trt=cols.trt)   
+
+```
+

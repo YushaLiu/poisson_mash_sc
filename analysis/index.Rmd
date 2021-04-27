@@ -27,7 +27,7 @@ Click on this [link](application_Ly6C_neg_v2.html) to see application of poisson
 Click on this [link](application_Dendritic_v2.html) to see application of poisson mash ruv to a subset of dendritic cells from the single cytokines dataset. <br/>
 
 
-## Presentation on application to cytokines dataset
+## Presentation on application to cytokines dataset (4/22)
 Click on this [link](model.html) to see a brief description of the poisson mash ruv method. <br/>
 Click on this [link](application_B_cells_v3.html) to see application of poisson mash ruv to a subset of B cells. <br/>
 Click on this [link](application_Ly6C_pos_v3.html) to see application of poisson mash ruv to a subset of Ly6C+ monocytes. <br/>
@@ -37,3 +37,10 @@ Click on this [link](application_CD4_T_cells.html) to see application of poisson
 Click on this [link](application_CD8_T_cells.html) to see application of poisson mash ruv to a subset of CD8 T cells. <br/>
 Click on this [link](application_Neutrophils.html) to see application of poisson mash ruv to a subset of neutrophils. <br/>
 Click on this [link](application_NK_cells.html) to see application of poisson mash ruv to a subset of NK cells. <br/>
+
+
+### Updated simulation and application results based on Neutrophils (4/27)
+Click on this [link](simulations_setting4.html) to see new simulation results based on poisson mash ruv fit to neutrophils. <br/>
+Click on this [link](simulations_setting4_rep1.html) to see examples of over-estimation by poisson mash ruv on replicate 1. <br/>
+Click on this [link](simulations_setting4_rep2.html) to see examples of over-estimation by poisson mash ruv on replicate 2. <br/>
+Click on this [link](examples_Neutrophils.html) to see examples where pre-shrinkage estimates and poisson mash ruv estimates are inconsistent. <br/>
