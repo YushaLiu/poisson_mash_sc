@@ -39,7 +39,7 @@ Click on this [link](application_Neutrophils.html) to see application of poisson
 Click on this [link](application_NK_cells.html) to see application of poisson mash ruv to a subset of NK cells. <br/>
 
 
-### Updated simulation and application results based on Neutrophils (4/27)
+## Updated simulation and application results based on Neutrophils (4/27)
 Click on this [link](simulations_setting4.html) to see new simulation results based on poisson mash ruv fit to neutrophils. <br/>
 Click on this [link](simulations_setting4_rep1.html) to see examples of over-estimation by poisson mash ruv on replicate 1. <br/>
 Click on this [link](simulations_setting4_rep2.html) to see examples of over-estimation by poisson mash ruv on replicate 2. <br/>
