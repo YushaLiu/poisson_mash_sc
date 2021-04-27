@@ -9,9 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Yusha Liu" />
 
 
-<title>Home</title>
+<title>Exploration of over-estimation in simulated single cell data (replicate 1)</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,6 +20,9 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -258,6 +262,69 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -265,6 +332,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -308,7 +385,9 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Home</h1>
+<h1 class="title toc-ignore">Exploration of over-estimation in simulated single cell data (replicate 1)</h1>
+<h4 class="author">Yusha Liu</h4>
+<h4 class="date">2021-4-27</h4>
 
 </div>
 
@@ -336,7 +415,7 @@ $(document).ready(function () {
 <strong>Last updated:</strong> 2021-04-27
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 2 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
 </p>
 <p>
 <strong>Knit directory:</strong> <code>poisson_mash_sc/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -358,6 +437,66 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
 <div class="panel-body">
 <p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20210330code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20210330)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20210330code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20210330)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
 </div>
 </div>
 </div>
@@ -410,7 +549,7 @@ Note that any generated files, e.g. HTML, png, CSS, etc., are not included in t
 <div id="versions" class="tab-pane fade">
 
 <p>
-These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/index.Rmd</code>) and HTML (<code>docs/index.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/simulations_setting4_rep1.Rmd</code>) and HTML (<code>docs/simulations_setting4_rep1.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
 </p>
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
@@ -439,7 +578,7 @@ Message
 Rmd
 </td>
 <td>
-<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/9febb255a4a2dd20b4b75e8aaa6f74160ea349e3/analysis/index.Rmd" target="_blank">9febb25</a>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/9febb255a4a2dd20b4b75e8aaa6f74160ea349e3/analysis/simulations_setting4_rep1.Rmd" target="_blank">9febb25</a>
 </td>
 <td>
 yushaliu
@@ -451,210 +590,6 @@ yushaliu
 explorations of over-estimation
 </td>
 </tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/YushaLiu/poisson_mash_sc/57393a023e177362caed184a66a4530afd9be6a2/docs/index.html" target="_blank">57393a0</a>
-</td>
-<td>
-yushaliu
-</td>
-<td>
-2021-04-25
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/c2ed3e9d425109f5c11de0a3af0b19ef52f97a6f/analysis/index.Rmd" target="_blank">c2ed3e9</a>
-</td>
-<td>
-yushaliu
-</td>
-<td>
-2021-04-25
-</td>
-<td>
-over-estimation explorations
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/YushaLiu/poisson_mash_sc/67e64e7caccfaa0bbda4dc50afaab981bd5f1604/docs/index.html" target="_blank">67e64e7</a>
-</td>
-<td>
-yushaliu
-</td>
-<td>
-2021-04-22
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/531070c4b7f320846487516d55bca0c56a654fc7/analysis/index.Rmd" target="_blank">531070c</a>
-</td>
-<td>
-yushaliu
-</td>
-<td>
-2021-04-22
-</td>
-<td>
-upload presentation results
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/YushaLiu/poisson_mash_sc/2a497f2b64ce6af5fb27355d3f30e16c851db8bc/docs/index.html" target="_blank">2a497f2</a>
-</td>
-<td>
-yushaliu
-</td>
-<td>
-2021-04-14
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/36caa0ed3cb811d7fc653a8c70a390e20aae45ac/analysis/index.Rmd" target="_blank">36caa0e</a>
-</td>
-<td>
-yushaliu
-</td>
-<td>
-2021-04-14
-</td>
-<td>
-update poisson mash ruv results
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/YushaLiu/poisson_mash_sc/0d2685afcb1bc1ed7c8e06d68aafc4f1431b1cfd/docs/index.html" target="_blank">0d2685a</a>
-</td>
-<td>
-yushaliu
-</td>
-<td>
-2021-03-31
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/4aeba12847ab86394d2c559c8c5ccbfbd3f8e9e5/analysis/index.Rmd" target="_blank">4aeba12</a>
-</td>
-<td>
-yushaliu
-</td>
-<td>
-2021-03-31
-</td>
-<td>
-Add more applications
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/YushaLiu/poisson_mash_sc/773b5b62cdacf0f9f10483527797bbc71a3c541c/docs/index.html" target="_blank">773b5b6</a>
-</td>
-<td>
-yushaliu
-</td>
-<td>
-2021-03-31
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/29e00976f397df86396aa0f7c15f993eceef182d/analysis/index.Rmd" target="_blank">29e0097</a>
-</td>
-<td>
-yushaliu
-</td>
-<td>
-2021-03-31
-</td>
-<td>
-Update results for poisson mash ruv on scdata
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/YushaLiu/poisson_mash_sc/961b3d1d8074401c45c3b5f90d6a3db229802bf5/docs/index.html" target="_blank">961b3d1</a>
-</td>
-<td>
-yushaliu
-</td>
-<td>
-2021-03-30
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/8cf92cd2d0f73e9188d99c8ad05429e56822f70e/analysis/index.Rmd" target="_blank">8cf92cd</a>
-</td>
-<td>
-yushaliu
-</td>
-<td>
-2021-03-30
-</td>
-<td>
-Start workflowr project.
-</td>
-</tr>
 </tbody>
 </table>
 </div>
@@ -662,21 +597,95 @@ Start workflowr project.
 </div>
 </div>
 </div>
-<p>Welcome to my research website.</p>
-<div id="application-and-simulation-based-on-cytokines-dataset" class="section level2">
-<h2>Application and simulation based on cytokines dataset</h2>
-<p>Click on this <a href="simulations.html">link</a> to see application of poisson mash and competing methods on simulated data. <br/> Click on this <a href="simulations_estimation.html">link</a> to see exploration of over-estimation in poisson mash application to simulated single cell data. <br/> Click on this <a href="application_B_cells.html">link</a> to see application of poisson mash ruv to a subset of B cells from the single cytokines dataset. <br/> Click on this <a href="application_Ly6C_pos.html">link</a> to see application of poisson mash ruv to a subset of Ly6C+ monocytes from the single cytokines dataset. <br/> Click on this <a href="application_Ly6C_neg.html">link</a> to see application of poisson mash ruv to a subset of Ly6C- monocytes from the single cytokines dataset. <br/> Click on this <a href="application_Dendritic.html">link</a> to see application of poisson mash ruv to a subset of dendritic cells from the single cytokines dataset. <br/></p>
-</div>
-<div id="updated-application-results" class="section level2">
-<h2>Updated application results</h2>
-<p>Click on this <a href="application_B_cells_v2.html">link</a> to see application of poisson mash ruv to a subset of B cells from the single cytokines dataset. <br/> Click on this <a href="application_Ly6C_pos_v2.html">link</a> to see application of poisson mash ruv to a subset of Ly6C+ monocytes from the single cytokines dataset. <br/> Click on this <a href="application_Ly6C_neg_v2.html">link</a> to see application of poisson mash ruv to a subset of Ly6C- monocytes from the single cytokines dataset. <br/> Click on this <a href="application_Dendritic_v2.html">link</a> to see application of poisson mash ruv to a subset of dendritic cells from the single cytokines dataset. <br/></p>
-</div>
-<div id="presentation-on-application-to-cytokines-dataset-422" class="section level2">
-<h2>Presentation on application to cytokines dataset (4/22)</h2>
-<p>Click on this <a href="model.html">link</a> to see a brief description of the poisson mash ruv method. <br/> Click on this <a href="application_B_cells_v3.html">link</a> to see application of poisson mash ruv to a subset of B cells. <br/> Click on this <a href="application_Ly6C_pos_v3.html">link</a> to see application of poisson mash ruv to a subset of Ly6C+ monocytes. <br/> Click on this <a href="application_Ly6C_neg_v3.html">link</a> to see application of poisson mash ruv to a subset of Ly6C- monocytes. <br/> Click on this <a href="application_Dendritic_v3.html">link</a> to see application of poisson mash ruv to a subset of dendritic cells. <br/> Click on this <a href="application_CD4_T_cells.html">link</a> to see application of poisson mash ruv to a subset of CD4 T cells. <br/> Click on this <a href="application_CD8_T_cells.html">link</a> to see application of poisson mash ruv to a subset of CD8 T cells. <br/> Click on this <a href="application_Neutrophils.html">link</a> to see application of poisson mash ruv to a subset of neutrophils. <br/> Click on this <a href="application_NK_cells.html">link</a> to see application of poisson mash ruv to a subset of NK cells. <br/></p>
-<div id="updated-simulation-and-application-results-based-on-neutrophils-427" class="section level3">
-<h3>Updated simulation and application results based on Neutrophils (4/27)</h3>
-<p>Click on this <a href="simulations_setting4.html">link</a> to see new simulation results based on poisson mash ruv fit to neutrophils. <br/> Click on this <a href="simulations_setting4_rep1.html">link</a> to see examples of over-estimation by poisson mash ruv on replicate 1. <br/> Click on this <a href="simulations_setting4_rep2.html">link</a> to see examples of over-estimation by poisson mash ruv on replicate 2. <br/> Click on this <a href="examples_Neutrophils.html">link</a> to see examples where pre-shrinkage estimates and poisson mash ruv estimates are inconsistent. <br/></p>
+<div id="gene-examples-with-over-estimation-in-replicate-1" class="section level2">
+<h2>Gene examples with over-estimation in replicate 1</h2>
+<pre class="r"><code>setwd(&quot;../simulations_sc/setting4/&quot;)
+sample.info &lt;- readRDS(&quot;signal_v2_data/sample_info.Rds&quot;)
+cols.trt &lt;- readRDS(&quot;sim_condition_colors.Rds&quot;)
+trts &lt;- names(cols.trt)
+source(&quot;plot_by_gene.R&quot;)
+
+### look at replicate 1
+iter = 1
+
+### read in data
+data &lt;- readRDS(paste0(&quot;signal_v2_data/raw_data&quot;, iter, &quot;.Rds&quot;))
+beta &lt;- data$beta
+R &lt;- ncol(beta)
+  
+### aggregate count data and size factors over conditions
+scdata &lt;- data$X
+si &lt;- readRDS(paste0(&quot;signal_v2_output/glmpca_rep_&quot;, iter, &quot;.Rds&quot;))$si
+data.jr &lt;- matrix(NA, nrow=nrow(scdata), ncol=R)
+rownames(data.jr) &lt;- rownames(scdata)
+colnames(data.jr) &lt;- trts
+s &lt;- rep(NA, R)
+names(s) &lt;- trts
+  
+for(r in 1:length(trts)){
+  data.tmp &lt;- scdata[, sample.info$sample==trts[r]]
+  data.jr[,r] &lt;- Matrix::rowSums(data.tmp)
+  s[r] &lt;- sum(si[sample.info$sample==trts[r]])
+}
+  
+s &lt;- s/min(s)
+  
+# load in the mash fit without common baseline
+mash.fit &lt;- readRDS(paste0(&quot;signal_v2_output/mash_cb_rep_&quot;, iter, &quot;.Rds&quot;))
+  
+# load poisson mash with ruv
+post &lt;- readRDS(paste0(&quot;signal_v2_output/pois_mash_ruv_posterior_rep_&quot;, iter, &quot;.Rds&quot;))</code></pre>
+<pre class="r"><code>plot_by_gene(data.jr, s, scdata, si, sample.info, res.mash.cb=mash.fit$result, res.pois.ruv=post, genename=&quot;Alox5ap&quot;, cols.trt=cols.trt) </code></pre>
+<p><img src="figure/simulations_setting4_rep1.Rmd/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/simulations_setting4_rep1.Rmd/unnamed-chunk-2-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plot_by_gene(data.jr, s, scdata, si, sample.info, res.mash.cb=mash.fit$result, res.pois.ruv=post, genename=&quot;Cnih4&quot;, cols.trt=cols.trt) </code></pre>
+<p><img src="figure/simulations_setting4_rep1.Rmd/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/simulations_setting4_rep1.Rmd/unnamed-chunk-3-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plot_by_gene(data.jr, s, scdata, si, sample.info, res.mash.cb=mash.fit$result, res.pois.ruv=post, genename=&quot;Zbtb8os&quot;, cols.trt=cols.trt) </code></pre>
+<p><img src="figure/simulations_setting4_rep1.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/simulations_setting4_rep1.Rmd/unnamed-chunk-4-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plot_by_gene(data.jr, s, scdata, si, sample.info, res.mash.cb=mash.fit$result, res.pois.ruv=post, genename=&quot;Ier5&quot;, cols.trt=cols.trt) </code></pre>
+<p><img src="figure/simulations_setting4_rep1.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/simulations_setting4_rep1.Rmd/unnamed-chunk-5-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plot_by_gene(data.jr, s, scdata, si, sample.info, res.mash.cb=mash.fit$result, res.pois.ruv=post, genename=&quot;Cebpg&quot;, cols.trt=cols.trt) </code></pre>
+<p><img src="figure/simulations_setting4_rep1.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/simulations_setting4_rep1.Rmd/unnamed-chunk-6-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plot_by_gene(data.jr, s, scdata, si, sample.info, res.mash.cb=mash.fit$result, res.pois.ruv=post, genename=&quot;Jund&quot;, cols.trt=cols.trt) </code></pre>
+<p><img src="figure/simulations_setting4_rep1.Rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/simulations_setting4_rep1.Rmd/unnamed-chunk-7-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plot_by_gene(data.jr, s, scdata, si, sample.info, res.mash.cb=mash.fit$result, res.pois.ruv=post, genename=&quot;Cotl1&quot;, cols.trt=cols.trt) </code></pre>
+<p><img src="figure/simulations_setting4_rep1.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/simulations_setting4_rep1.Rmd/unnamed-chunk-8-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plot_by_gene(data.jr, s, scdata, si, sample.info, res.mash.cb=mash.fit$result, res.pois.ruv=post, genename=&quot;Rab11a&quot;, cols.trt=cols.trt) </code></pre>
+<p><img src="figure/simulations_setting4_rep1.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/simulations_setting4_rep1.Rmd/unnamed-chunk-9-2.png" width="672" style="display: block; margin: auto;" /></p>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 3.6.2 (2019-12-12)
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+Running under: macOS  10.16
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRblas.0.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRlapack.dylib
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] multcomp_1.4-16 TH.data_1.0-10  MASS_7.3-51.6   survival_3.1-12
+[5] mvtnorm_1.1-1   rmeta_3.0       workflowr_1.6.2
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_1.0.6       knitr_1.30       whisker_0.4      magrittr_2.0.1  
+ [5] splines_3.6.2    lattice_0.20-41  R6_2.5.0         rlang_0.4.10    
+ [9] stringr_1.4.0    tools_3.6.2      grid_3.6.2       xfun_0.17       
+[13] git2r_0.27.1     htmltools_0.4.0  yaml_2.2.1       digest_0.6.27   
+[17] rprojroot_2.0.2  Matrix_1.2-18    later_1.0.0      codetools_0.2-16
+[21] promises_1.1.0   fs_1.4.1         glue_1.4.2       evaluate_0.14   
+[25] rmarkdown_2.3    sandwich_3.0-0   glmpca_0.2.0     stringi_1.4.6   
+[29] compiler_3.6.2   httpuv_1.5.2     zoo_1.8-8       </code></pre>
 </div>
 </div>
 
@@ -694,6 +703,8 @@ footer is added to webpages before the MathJax javascript. -->
 </script>
 
 
+</div>
+</div>
 
 </div>
 
@@ -726,6 +737,32 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
