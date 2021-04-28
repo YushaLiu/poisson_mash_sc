@@ -111,3 +111,30 @@ As can be seen above, the estimates of log-fold-change are highly consistent bet
 \noindent 2. estimate of $\beta_{jr} -\frac{1}{R}\sum_r\beta_{jr}$ based on GLM fit to the cell-level count data with Poisson link; 
 
 \noindent 3. posterior mean of $\beta_{jr} -\frac{1}{R}\sum_r\beta_{jr}$ given by Poisson mash without ruv.
+
+
+## Alox5ap: scatter plot with updated reference line
+Let $c_j = \log(\hat{\lambda}_{j}) - \frac{1}{R}\sum_r\log(\hat{\lambda}_{jr})$, and $\tilde{X}_{jr} = (\sum_r X_{jr}) \frac{s_r}{\sum_r{s_r}}$, i.e., the expected count of $X_{jr}$ in the scatter plot. Following Eqs(3)-(4), we have
+\begin{align}
+(5). \quad\quad \log(\frac{\tilde{X}_{jr}}{X_{jr}}) = \log(\hat{\lambda}_j) - \log(\hat{\lambda}_{jr}) = c_j + \frac{1}{R}\sum_r\log(\hat{\lambda}_{jr}) - \log(\hat{\lambda}_{jr}) = c_j - \hat{\beta}_{jr}. \\
+\end{align}
+
+Assuming $\beta_{jr}=0$ for $\forall \; r$, the updated reference line in the scatter plot should be 
+\begin{align}
+(6). \quad\quad Y = X\exp(c_j).\\
+\end{align}
+
+```{r warning=FALSE, message=FALSE}
+# c.j for Alox5ap
+c.j <- loglambda - mean(loglambda.jr)
+c.j
+
+# scatter plots comparing observed and expected counts for each treatment
+xmin <- pmin(min(c(data.scatter$observed, data.scatter$expected)) - 5, 0)
+xmax <- max(c(data.scatter$observed, data.scatter$expected)) + 10
+plot(data.scatter$observed, data.scatter$expected, col=cols.trt, pch=19, xlim=c(xmin, xmax), ylim=exp(c.j)*c(xmin, xmax),  
+     xlab="observed count", ylab="expected count", main="Alox5ap")
+text(x=data.scatter$observed + (xmax-xmin)/50, y=data.scatter$expected + (xmax-xmin)/50, labels=trts, col=cols.trt, cex=0.6)
+abline(a=0, b=exp(c.j), col="gray")
+
+```
