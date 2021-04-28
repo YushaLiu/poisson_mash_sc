@@ -1,0 +1,113 @@
+---
+title: "Exploration of inconsistency between scatter plot and GLM fit"
+author: "Yusha Liu"
+header-includes:
+date: "2021-4-28"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+
+## Model setup
+Suppose there are $j=1, \dots, J$ genes and $i=1, \dots, N$ cells. The observed single cell count matrix $Y$ is $N \times J$, with its $(i, j)$ element $Y_{ij}$ denoting the count of gene $j$ in cell $i$.  
+
+We assume that the $N$ cells come from $r=1, \dots, R$ conditions, with $n_r$ cells (indexed by $\mathcal{S}_r \subset \{1, \dots, N\}$) coming from condition $r$. To compare expression levels across multiple conditions, we collapse the single cell count matrix $Y$ into a condition level count matrix $X$, which is a $J \times R$ matrix with its $(j, r)$ element $X_{jr} = \sum_{i \in \mathcal{S}_r} Y_{ij}$.  
+
+Let $s_i$ denote the size factor of cell $i$, which can be calculated by taking the sum (or equivalently, mean) of counts over all genes in cell $i$, or using other [more robust methods](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-0947-7).  Let $s_r = \sum_{i \in \mathcal{S}_r} s_i$ denote the size factor of condition $r$. 
+
+Ignoring the random effect term and unwanted variation for now, we assume the following model on collapsed data $X$:
+\begin{align}
+(1). \quad\quad & X_{jr} \; \sim Pois (s_r \lambda_{jr}), \\
+(2). \quad\quad & \log \left(\lambda_{jr} \right) \; = \tilde{\beta}_{jr} = \mu_j + \beta_{jr}. \\
+\end{align}
+
+Here $\lambda_{jr}$ is a gene-specific, condition-specific intensity parameter, $s_r$ is condition-specific and accounts for different sequencing depths across conditions. We decompose $\log(\lambda_{jr})$ for gene $j$ and condition $r$ into 2 parts:  (i) $\mu_j$ which models the gene-specific underlying mean shared by all conditions, (ii) $\beta_{jr}$ which models the gene-specific, condition-specific effect.
+
+
+## Estimate of log-fold-change from scatter plot
+Given Eq(1), the MLE estimate of $\lambda_{jr}$ is $\hat{\lambda}_{jr} = \frac{X_{jr}}{s_r}$. Assuming $\lambda_{jr} = \lambda_j$ for $\forall \; r$, the MLE estimate of $\lambda_j$ is $\hat{\lambda}_j = \frac{\sum_r X_{jr}}{\sum_r s_r}$. Therefore, the log-fold-change seen from the scatter plot is:
+\begin{align}
+(3). \quad\quad \log(\frac{\hat{\lambda}_{jr}}{\hat{\lambda}_j}) = \log(\frac{X_{jr}/s_r}{\sum_r X_{jr}/ \sum_r s_r}) = \log(\frac{X_{jr}}{(\sum_r X_{jr}) \frac{s_r}{\sum_r{s_r}}}) = \log(\frac{\text{observed}}{\text{expected}}).
+\end{align}
+
+
+## Estimate of log-fold-change from log-linear model
+Given the log-linear model Eq(2), the log-fold-change between condition $r$ and the average is:
+\begin{align}
+(4). \quad\quad \hat{\beta}_{jr} - \frac{1}{R}\sum_r\hat{\beta}_{jr} = \hat{\tilde{\beta}}_{jr} - \frac{1}{R}\sum_r \hat{\tilde{\beta}}_{jr} = \log(\hat{\lambda}_{jr}) - \frac{1}{R}\sum_r \log(\hat{\lambda}_{jr}) \neq \log(\hat{\lambda}_{jr}) - \log(\hat{\lambda}_j),
+\end{align}
+since $\frac{1}{R}\sum_r \log(\hat{\lambda}_{jr}) \neq \log(\hat{\lambda}_j)$. This explains why the log-fold-change suggested by the scatter plot is different from the estimate of $\beta_{jr}$ in Eq(2).
+
+
+## Example: Alox5ap
+```{r warning=FALSE, message=FALSE}
+cols.trt <- readRDS("../applications_sc/B_cells/condition_colors.Rds")
+trts <- names(cols.trt)
+
+### swap the color code of IL1b and IL3 for clearer display of IL1b
+cols.trt2 <- cols.trt
+cols.trt2[which(trts=="IL1b")] <- cols.trt[which(trts=="IL3")]
+cols.trt2[which(trts=="IL3")] <- cols.trt[which(trts=="IL1b")]
+cols.trt <- cols.trt2
+
+### load in condition-level count data
+data <- readRDS("../applications_sc/Neutrophils/data_jr.Rds")
+data.jr <- data$data.jr
+idx.gene <- which(rownames(data.jr)=="Alox5ap")
+x <- data.jr[idx.gene,]
+s <- data$s
+
+```
+
+
+## Alox5ap: log-fold-change from the scatter plot
+```{r warning=FALSE, message=FALSE}
+loglambda <- log(sum(x)/sum(s))
+loglambda.jr <- log(x/s)
+
+lfc1 <- loglambda.jr - loglambda
+names(lfc1) <- paste0(trts, "-mean")
+
+# log fold change
+round(lfc1, 3)
+
+# scatter plots comparing observed and expected counts for each treatment
+data.scatter <- data.frame(trt=trts, observed=x, expected=sum(x)*s/sum(s))
+par(mfrow=c(1,1))
+
+xmin <- pmin(min(c(data.scatter$observed, data.scatter$expected)) - 5, 0)
+xmax <- max(c(data.scatter$observed, data.scatter$expected)) + 10
+plot(data.scatter$observed, data.scatter$expected, col=cols.trt, pch=19, xlim=c(xmin, xmax), ylim=c(xmin, xmax),  
+     xlab="observed count", ylab="expected count", main="Alox5ap")
+text(x=data.scatter$observed + (xmax-xmin)/50, y=data.scatter$expected + (xmax-xmin)/50, labels=trts, col=cols.trt, cex=0.6)
+abline(a=0, b=1, col="gray")
+
+```
+
+
+## Alox5ap: log-fold-change from the log-linear model
+```{r warning=FALSE, message=FALSE}
+lfc2 <- loglambda.jr - mean(loglambda.jr)
+names(lfc2) <- paste0(trts, "-mean")
+
+# log fold change
+round(lfc2, 3)
+
+# load in glm fit with poisson link
+res.glm <- readRDS("../applications_sc/Neutrophils/glm_poisson.Rds")
+round(res.glm$est.pre.shrink[idx.gene,], 3)
+
+# load in poisson mash without ruv
+res.gene <- readRDS("../applications_sc/Neutrophils/poisson_mash_no_ruv/Alox5ap.Rds")
+round(res.gene$PosteriorMean, 3)
+
+```
+
+As can be seen above, the estimates of log-fold-change are highly consistent between
+
+\noindent 1. $\hat{\beta}_{jr} - \frac{1}{R}\sum_r\hat{\beta}_{jr}$ given by Eq(4);
+
+\noindent 2. estimate of $\beta_{jr} -\frac{1}{R}\sum_r\beta_{jr}$ based on GLM fit to the cell-level count data with Poisson link; 
+
+\noindent 3. posterior mean of $\beta_{jr} -\frac{1}{R}\sum_r\beta_{jr}$ given by Poisson mash without ruv.
