@@ -503,16 +503,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomYushaLiupoissonmashsctree862e95d8762d4504e96ee4537816b0fa9db8734ftargetblank862e95da"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/YushaLiu/poisson_mash_sc/tree/862e95d8762d4504e96ee4537816b0fa9db8734f" target="_blank">862e95d</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomYushaLiupoissonmashsctreee2ec4aaa234825156bfc9528dc7614ef84975d1ctargetblanke2ec4aaa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/YushaLiu/poisson_mash_sc/tree/e2ec4aaa234825156bfc9528dc7614ef84975d1c" target="_blank">e2ec4aa</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomYushaLiupoissonmashsctree862e95d8762d4504e96ee4537816b0fa9db8734ftargetblank862e95da" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomYushaLiupoissonmashsctreee2ec4aaa234825156bfc9528dc7614ef84975d1ctargetblanke2ec4aaa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/YushaLiu/poisson_mash_sc/tree/862e95d8762d4504e96ee4537816b0fa9db8734f" target="_blank">862e95d</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/YushaLiu/poisson_mash_sc/tree/e2ec4aaa234825156bfc9528dc7614ef84975d1c" target="_blank">e2ec4aa</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -573,6 +573,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/e2ec4aaa234825156bfc9528dc7614ef84975d1c/analysis/Alox5ap.Rmd" target="_blank">e2ec4aa</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-28
+</td>
+<td>
+update reference line in scatter plot
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/YushaLiu/poisson_mash_sc/e7ad94020e26aec66abca6d87a5c1e817c98f772/docs/Alox5ap.html" target="_blank">e7ad940</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-28
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -675,6 +709,43 @@ plot(data.scatter$observed, data.scatter$expected, col=cols.trt, pch=19, xlim=c(
 text(x=data.scatter$observed + (xmax-xmin)/50, y=data.scatter$expected + (xmax-xmin)/50, labels=trts, col=cols.trt, cex=0.6)
 abline(a=0, b=1, col=&quot;gray&quot;)</code></pre>
 <p><img src="figure/Alox5ap.Rmd/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-2-1">
+Past versions of unnamed-chunk-2-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-2-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/YushaLiu/poisson_mash_sc/blob/e7ad94020e26aec66abca6d87a5c1e817c98f772/docs/figure/Alox5ap.Rmd/unnamed-chunk-2-1.png" target="_blank">e7ad940</a>
+</td>
+<td>
+yushaliu
+</td>
+<td>
+2021-04-28
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="alox5ap-log-fold-change-from-the-log-linear-model" class="section level2">
 <h2>Alox5ap: log-fold-change from the log-linear model</h2>
@@ -741,6 +812,27 @@ IL12p70-mean   IL17a-mean    IL13-mean    IL15-mean   IL17f-mean    IL22-mean
 <p>1. <span class="math inline">\(\hat{\beta}_{jr} - \frac{1}{R}\sum_r\hat{\beta}_{jr}\)</span> given by Eq(4);</p>
 <p>2. estimate of <span class="math inline">\(\beta_{jr} -\frac{1}{R}\sum_r\beta_{jr}\)</span> based on GLM fit to the cell-level count data with Poisson link;</p>
 <p>3. posterior mean of <span class="math inline">\(\beta_{jr} -\frac{1}{R}\sum_r\beta_{jr}\)</span> given by Poisson mash without ruv.</p>
+</div>
+<div id="alox5ap-scatter-plot-with-updated-reference-line" class="section level2">
+<h2>Alox5ap: scatter plot with updated reference line</h2>
+<p>Let <span class="math inline">\(c_j = \log(\hat{\lambda}_{j}) - \frac{1}{R}\sum_r\log(\hat{\lambda}_{jr})\)</span>, and <span class="math inline">\(\tilde{X}_{jr} = (\sum_r X_{jr}) \frac{s_r}{\sum_r{s_r}}\)</span>, i.e., the expected count of <span class="math inline">\(X_{jr}\)</span> in the scatter plot. Following Eqs(3)-(4), we have <span class="math display">\[\begin{align}
+(5). \quad\quad \log(\frac{\tilde{X}_{jr}}{X_{jr}}) = \log(\hat{\lambda}_j) - \log(\hat{\lambda}_{jr}) = c_j + \frac{1}{R}\sum_r\log(\hat{\lambda}_{jr}) - \log(\hat{\lambda}_{jr}) = c_j - \hat{\beta}_{jr}. \\
+\end{align}\]</span></p>
+<p>Assuming <span class="math inline">\(\beta_{jr}=0\)</span> for <span class="math inline">\(\forall \; r\)</span>, the updated reference line in the scatter plot should be <span class="math display">\[\begin{align}
+(6). \quad\quad Y = X\exp(c_j).\\
+\end{align}\]</span></p>
+<pre class="r"><code># c.j for Alox5ap
+c.j &lt;- loglambda - mean(loglambda.jr)
+c.j</code></pre>
+<pre><code>[1] 0.3441261</code></pre>
+<pre class="r"><code># scatter plots comparing observed and expected counts for each treatment
+xmin &lt;- pmin(min(c(data.scatter$observed, data.scatter$expected)) - 5, 0)
+xmax &lt;- max(c(data.scatter$observed, data.scatter$expected)) + 10
+plot(data.scatter$observed, data.scatter$expected, col=cols.trt, pch=19, xlim=c(xmin, xmax), ylim=exp(c.j)*c(xmin, xmax),  
+     xlab=&quot;observed count&quot;, ylab=&quot;expected count&quot;, main=&quot;Alox5ap&quot;)
+text(x=data.scatter$observed + (xmax-xmin)/50, y=data.scatter$expected + (xmax-xmin)/50, labels=trts, col=cols.trt, cex=0.6)
+abline(a=0, b=exp(c.j), col=&quot;gray&quot;)</code></pre>
+<p><img src="figure/Alox5ap.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
