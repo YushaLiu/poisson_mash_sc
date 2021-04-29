@@ -37,7 +37,7 @@ Given the log-linear model Eq(2), the log-fold-change between condition $r$ and 
 \begin{align}
 (4). \quad\quad \hat{\beta}_{jr} - \frac{1}{R}\sum_r\hat{\beta}_{jr} = \hat{\tilde{\beta}}_{jr} - \frac{1}{R}\sum_r \hat{\tilde{\beta}}_{jr} = \log(\hat{\lambda}_{jr}) - \frac{1}{R}\sum_r \log(\hat{\lambda}_{jr}) \neq \log(\hat{\lambda}_{jr}) - \log(\hat{\lambda}_j),
 \end{align}
-since $\frac{1}{R}\sum_r \log(\hat{\lambda}_{jr}) \neq \log(\hat{\lambda}_j)$. This explains why the log-fold-change suggested by the scatter plot is different from the estimate of $\beta_{jr}$ in Eq(2).
+since $\frac{1}{R}\sum_r \log(\hat{\lambda}_{jr}) \neq \log(\hat{\lambda}_j)$ unless $\frac{X_{jr}}{s_r}$ is the same for all $r$. This explains why the log-fold-change suggested by the scatter plot is different from the estimate of $\beta_{jr} - \frac{1}{R}\sum_r\beta_{jr}$.
 
 
 ## Example: Alox5ap
@@ -116,10 +116,10 @@ As can be seen above, the estimates of log-fold-change are highly consistent bet
 ## Alox5ap: scatter plot with updated reference line
 Let $c_j = \log(\hat{\lambda}_{j}) - \frac{1}{R}\sum_r\log(\hat{\lambda}_{jr})$, and $\tilde{X}_{jr} = (\sum_r X_{jr}) \frac{s_r}{\sum_r{s_r}}$, i.e., the expected count of $X_{jr}$ in the scatter plot. Following Eqs(3)-(4), we have
 \begin{align}
-(5). \quad\quad \log(\frac{\tilde{X}_{jr}}{X_{jr}}) = \log(\hat{\lambda}_j) - \log(\hat{\lambda}_{jr}) = c_j + \frac{1}{R}\sum_r\log(\hat{\lambda}_{jr}) - \log(\hat{\lambda}_{jr}) = c_j - \hat{\beta}_{jr}. \\
+(5). \quad\quad \log(\frac{\tilde{X}_{jr}}{X_{jr}}) = \log(\hat{\lambda}_j) - \log(\hat{\lambda}_{jr}) = c_j - \log(\hat{\lambda}_{jr}) + \frac{1}{R}\sum_r\log(\hat{\lambda}_{jr}) = c_j - \hat{\beta}_{jr} + \frac{1}{R}\sum_r\hat{\beta}_{jr}. \\
 \end{align}
 
-Assuming $\beta_{jr}=0$ for $\forall \; r$, the updated reference line in the scatter plot should be 
+Assuming $\beta_{jr} - \frac{1}{R}\sum_r\beta_{jr}=0$ for $r$, the updated reference line in the scatter plot should be 
 \begin{align}
 (6). \quad\quad Y = X\exp(c_j).\\
 \end{align}
