@@ -1,0 +1,212 @@
+---
+title: "Application of poisson mash ruv to 8 cell types in single cell cytokines data"
+author: "Yusha Liu"
+header-includes:
+date: "2021-5-25"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+## Summary
+We separately apply poisson mash ruv to data from each of the following 8 cell types in the cytokines dataset: B cells, CD4 T cells, CD8 T cells, dendritic cells, Ly6C- monocytes, Ly6C+ monocytes, neutrophils and NK cells. For each cell type, we fit poisson mash ruv to compare gene expressions across $R=46$ cytokine treatments including control. Genes with fewer than $25$ counts summed over all cells are removed. 
+```{r warning=FALSE, message=FALSE}
+cols.trt <- readRDS("../applications_sc/B_cells/condition_colors.Rds")
+trts <- names(cols.trt)
+
+```
+
+
+
+## Pattern of effect sharing in each cell type
+For poisson mash ruv fit to each cell type, we show the dominant effect-sharing patterns in the data as captured by the data-driven prior covariances that receive most weights.
+```{r warning=FALSE, message=FALSE}
+## B cells
+fit.ed <- readRDS("../applications_sc/B_cells/full_data/pois_mash_ruv_ed.Rds")
+res <- readRDS("../applications_sc/B_cells/full_data/pois_mash_ruv_fit.Rds")
+pi.mat <- matrix(res$pi, ncol=length(res$wlist), byrow=TRUE)
+rownames(pi.mat) <- c(names(res$Ulist), names(res$ulist))
+colnames(pi.mat) <- paste0("w=", round(res$wlist, 3))
+
+## dominant effect-sharing patterns
+eig.tPCA <- eigen(fit.ed$Ulist[[1]])
+pve.tPCA <- eig.tPCA$values/sum(eig.tPCA$values)
+
+for (k in 1:2){
+  v <- eig.tPCA$vectors[,k]
+  v <- v/v[which.max(abs(v))]
+  
+  ed.plot <- barplot(v, col = cols.trt, xlab = "", ylim = range(v+0.5*sign(v)),
+                     main = paste0("B cells\n", names(fit.ed$Ulist)[1], ": weight ", round(rowSums(pi.mat)[1],3), 
+                                   ": Eigenvector ", k, " (pve = ", round(pve.tPCA[k],3), ")"))
+  text(x = ed.plot, y = v + ifelse(v >= 0, 0.1, -0.25),  label = names(cols.trt), pos = 3, cex = 0.75, col = "black", srt=90)
+}
+
+```
+
+
+```{r warning=FALSE, message=FALSE}
+## CD4 T cells
+fit.ed <- readRDS("../applications_sc/CD4/full_data/pois_mash_ruv_ed.Rds")
+res <- readRDS("../applications_sc/CD4/full_data/pois_mash_ruv_fit.Rds")
+pi.mat <- matrix(res$pi, ncol=length(res$wlist), byrow=TRUE)
+rownames(pi.mat) <- c(names(res$Ulist), names(res$ulist))
+colnames(pi.mat) <- paste0("w=", round(res$wlist, 3))
+
+## dominant effect-sharing patterns
+eig.tPCA <- eigen(fit.ed$Ulist[[1]])
+pve.tPCA <- eig.tPCA$values/sum(eig.tPCA$values)
+
+for (k in 1:1){
+  v <- eig.tPCA$vectors[,k]
+  v <- v/v[which.max(abs(v))]
+  
+  ed.plot <- barplot(v, col = cols.trt, xlab = "", ylim = range(v+0.5*sign(v)),
+                     main = paste0("CD4 T cells\n", names(fit.ed$Ulist)[1], ": weight ", round(rowSums(pi.mat)[1],3), 
+                                   ": Eigenvector ", k, " (pve = ", round(pve.tPCA[k],3), ")"))
+  text(x = ed.plot, y = v + ifelse(v >= 0, 0.1, -0.25),  label = names(cols.trt), pos = 3, cex = 0.75, col = "black", srt=90)
+}
+
+```
+
+
+```{r warning=FALSE, message=FALSE}
+## CD8 T cells
+fit.ed <- readRDS("../applications_sc/CD8/full_data/pois_mash_ruv_ed.Rds")
+res <- readRDS("../applications_sc/CD8/full_data/pois_mash_ruv_fit.Rds")
+pi.mat <- matrix(res$pi, ncol=length(res$wlist), byrow=TRUE)
+rownames(pi.mat) <- c(names(res$Ulist), names(res$ulist))
+colnames(pi.mat) <- paste0("w=", round(res$wlist, 3))
+
+## dominant effect-sharing patterns
+eig.tPCA <- eigen(fit.ed$Ulist[[1]])
+pve.tPCA <- eig.tPCA$values/sum(eig.tPCA$values)
+
+for (k in 1:1){
+  v <- eig.tPCA$vectors[,k]
+  v <- v/v[which.max(abs(v))]
+  
+  ed.plot <- barplot(v, col = cols.trt, xlab = "", ylim = range(v+0.5*sign(v)),
+                     main = paste0("CD8 T cells\n", names(fit.ed$Ulist)[1], ": weight ", round(rowSums(pi.mat)[1],3), 
+                                   ": Eigenvector ", k, " (pve = ", round(pve.tPCA[k],3), ")"))
+  text(x = ed.plot, y = v + ifelse(v >= 0, 0.1, -0.25),  label = names(cols.trt), pos = 3, cex = 0.75, col = "black", srt=90)
+}
+
+```
+
+
+```{r warning=FALSE, message=FALSE}
+## Dendritic cells
+fit.ed <- readRDS("../applications_sc/Dendritic/full_data/pois_mash_ruv_ed.Rds")
+res <- readRDS("../applications_sc/Dendritic/full_data/pois_mash_ruv_fit.Rds")
+pi.mat <- matrix(res$pi, ncol=length(res$wlist), byrow=TRUE)
+rownames(pi.mat) <- c(names(res$Ulist), names(res$ulist))
+colnames(pi.mat) <- paste0("w=", round(res$wlist, 3))
+
+## dominant effect-sharing patterns
+for (k in 3:4){
+  v <- as.numeric(fit.ed$ulist[[k]])
+  v <- v/v[which.max(abs(v))]
+    
+  ed.plot <- barplot(v, col = cols.trt, xlab = "", ylim = range(v+0.5*sign(v)), 
+                     main = paste0("Dendritic cells\n", names(fit.ed$ulist)[k], ": weight ", round(rowSums(pi.mat)[k+2],3))) 
+  text(x = ed.plot, y = v + ifelse(v >= 0, 0.1, -0.25),  label = names(cols.trt), pos = 3, cex = 0.75, col = "black", srt=90)   
+} 
+
+```
+
+
+```{r warning=FALSE, message=FALSE}
+## Ly6C- monocytes
+fit.ed <- readRDS("../applications_sc/Ly6C-/full_data/pois_mash_ruv_ed.Rds")
+res <- readRDS("../applications_sc/Ly6C-/full_data/pois_mash_ruv_fit.Rds")
+pi.mat <- matrix(res$pi, ncol=length(res$wlist), byrow=TRUE)
+rownames(pi.mat) <- c(names(res$Ulist), names(res$ulist))
+colnames(pi.mat) <- paste0("w=", round(res$wlist, 3))
+
+## dominant effect-sharing patterns
+eig.tPCA <- eigen(fit.ed$Ulist[[1]])
+pve.tPCA <- eig.tPCA$values/sum(eig.tPCA$values)
+
+for (k in 1:2){
+  v <- eig.tPCA$vectors[,k]
+  v <- v/v[which.max(abs(v))]
+  
+  ed.plot <- barplot(v, col = cols.trt, xlab = "", ylim = range(v+0.5*sign(v)),
+                     main = paste0("Ly6C- monocytes\n", names(fit.ed$Ulist)[1], ": weight ", round(rowSums(pi.mat)[1],3), 
+                                   ": Eigenvector ", k, " (pve = ", round(pve.tPCA[k],3), ")"))
+  text(x = ed.plot, y = v + ifelse(v >= 0, 0.1, -0.25),  label = names(cols.trt), pos = 3, cex = 0.75, col = "black", srt=90)
+}
+
+```
+
+
+```{r warning=FALSE, message=FALSE}
+## Ly6C+ monocytes
+fit.ed <- readRDS("../applications_sc/Ly6C+/full_data/pois_mash_ruv_ed.Rds")
+res <- readRDS("../applications_sc/Ly6C+/full_data/pois_mash_ruv_fit.Rds")
+pi.mat <- matrix(res$pi, ncol=length(res$wlist), byrow=TRUE)
+rownames(pi.mat) <- c(names(res$Ulist), names(res$ulist))
+colnames(pi.mat) <- paste0("w=", round(res$wlist, 3))
+
+## dominant effect-sharing patterns
+eig.tPCA <- eigen(fit.ed$Ulist[[1]])
+pve.tPCA <- eig.tPCA$values/sum(eig.tPCA$values)
+
+for (k in 1:2){
+  v <- eig.tPCA$vectors[,k]
+  v <- v/v[which.max(abs(v))]
+  
+  ed.plot <- barplot(v, col = cols.trt, xlab = "", ylim = range(v+0.5*sign(v)),
+                     main = paste0("Ly6C+ monocytes\n", names(fit.ed$Ulist)[1], ": weight ", round(rowSums(pi.mat)[1],3), 
+                                   ": Eigenvector ", k, " (pve = ", round(pve.tPCA[k],3), ")"))
+  text(x = ed.plot, y = v + ifelse(v >= 0, 0.1, -0.25),  label = names(cols.trt), pos = 3, cex = 0.75, col = "black", srt=90)
+}
+
+```
+
+
+```{r warning=FALSE, message=FALSE}
+## Neutrophils
+fit.ed <- readRDS("../applications_sc/Neutrophils/full_data/pois_mash_ruv_ed.Rds")
+res <- readRDS("../applications_sc/Neutrophils/full_data/pois_mash_ruv_fit.Rds")
+pi.mat <- matrix(res$pi, ncol=length(res$wlist), byrow=TRUE)
+rownames(pi.mat) <- c(names(res$Ulist), names(res$ulist))
+colnames(pi.mat) <- paste0("w=", round(res$wlist, 3))
+
+## dominant effect-sharing patterns
+eig.tPCA <- eigen(fit.ed$Ulist[[1]])
+pve.tPCA <- eig.tPCA$values/sum(eig.tPCA$values)
+
+for (k in 1:1){
+  v <- eig.tPCA$vectors[,k]
+  v <- v/v[which.max(abs(v))]
+  
+  ed.plot <- barplot(v, col = cols.trt, xlab = "", ylim = range(v+0.5*sign(v)),
+                     main = paste0("Neutrophils\n", names(fit.ed$Ulist)[1], ": weight ", round(rowSums(pi.mat)[1],3), 
+                                   ": Eigenvector ", k, " (pve = ", round(pve.tPCA[k],3), ")"))
+  text(x = ed.plot, y = v + ifelse(v >= 0, 0.1, -0.25),  label = names(cols.trt), pos = 3, cex = 0.75, col = "black", srt=90)
+}
+
+```
+
+
+```{r warning=FALSE, message=FALSE}
+## NK cells
+fit.ed <- readRDS("../applications_sc/NK_cells/full_data/pois_mash_ruv_ed.Rds")
+res <- readRDS("../applications_sc/NK_cells/full_data/pois_mash_ruv_fit.Rds")
+pi.mat <- matrix(res$pi, ncol=length(res$wlist), byrow=TRUE)
+rownames(pi.mat) <- c(names(res$Ulist), names(res$ulist))
+colnames(pi.mat) <- paste0("w=", round(res$wlist, 3))
+
+## dominant effect-sharing patterns
+for (k in 1:1){
+  v <- as.numeric(fit.ed$ulist[[k]])
+  v <- v/v[which.max(abs(v))]
+    
+  ed.plot <- barplot(v, col = cols.trt, xlab = "", ylim = range(v+0.5*sign(v)), 
+                     main = paste0("NK cells\n", names(fit.ed$ulist)[k], ": weight ", round(rowSums(pi.mat)[k+2],3))) 
+  text(x = ed.plot, y = v + ifelse(v >= 0, 0.1, -0.25),  label = names(cols.trt), pos = 3, cex = 0.75, col = "black", srt=90)   
+} 
+
+```
